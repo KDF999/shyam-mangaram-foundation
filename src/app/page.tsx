@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
   Heart,
   QrCode,
@@ -16,7 +17,7 @@ import {
   Play,
   X,
   ArrowRight,
-  ExternalLink,
+  Menu,
 } from "lucide-react";
 
 interface SevaTier {
@@ -34,14 +35,14 @@ const SEVA_TIERS: SevaTier[] = [
     id: "feed-10",
     name: "Anna Daan Seva",
     amount: 501,
-    impact: "Feeds 10 devotees a full hot, satvik Sunday meal completely free of cost in Chembur",
+    impact: "Feeds 10 needy people a full hot, satvik Sunday meal completely free of cost in Chembur",
     category: "langad",
   },
   {
     id: "bhog-seva",
     name: "Prasad & Bhog Seva",
     amount: 1100,
-    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti and free distribution",
+    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti and free distribution to devotees",
     category: "langad",
   },
   {
@@ -56,14 +57,14 @@ const SEVA_TIERS: SevaTier[] = [
     id: "deg-sponsor",
     name: "Full Langad Deg",
     amount: 5100,
-    impact: "Sponsors one giant cauldron (Deg) of hot Langad served free to 150+ devotees",
+    impact: "Sponsors one giant cauldron (Deg) of hot Langad served free to 150+ needy devotees",
     category: "langad",
   },
   {
     id: "co-sponsor",
     name: "Sunday Langad Co-Sponsor",
     amount: 11000,
-    impact: "Co-sponsors the entire Sunday feast feeding over 500+ needy devotees free of cost",
+    impact: "Co-sponsors the entire Sunday feast feeding over 500+ needy devotees completely free of cost",
     category: "langad",
   },
   // Gaushala Seva Tiers
@@ -114,6 +115,7 @@ export default function Home() {
   const [copiedBank, setCopiedBank] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"upi" | "bank">("upi");
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   const [donorForm, setDonorForm] = useState({
     name: "",
@@ -161,12 +163,12 @@ export default function Home() {
     : SEVA_TIERS.filter((t) => t.category === selectedCategory);
 
   return (
-    <main className="min-h-screen bg-[#18120E] text-[#FCF8F2] selection:bg-amber-400 selection:text-black font-sans antialiased">
+    <main className="min-h-screen bg-[#18120E] text-[#FCF8F2] selection:bg-amber-400 selection:text-black font-sans antialiased overflow-x-hidden">
       {/* ------------------------------------------------------------------
           1. SACRED TOP BANNER (INCREASED SANSKRIT FONT SIZE)
           ------------------------------------------------------------------ */}
-      <div className="bg-gradient-to-r from-[#832607] via-[#B45309] to-[#832607] text-white py-2 px-4 text-center border-b border-amber-400/20 shadow-sm flex items-center justify-center gap-3">
-        <span className="sanskrit-text text-base sm:text-lg font-bold text-amber-200 tracking-wide">
+      <div className="bg-gradient-to-r from-[#832607] via-[#B45309] to-[#832607] text-white py-2 px-3 sm:px-4 text-center border-b border-amber-400/20 shadow-sm flex items-center justify-center gap-2 sm:gap-3">
+        <span className="sanskrit-text text-sm sm:text-lg font-bold text-amber-200 tracking-wide shrink-0">
           ॥ ॐ श्री हनुमते नमः ॥
         </span>
         <span className="hidden sm:inline text-amber-300/40">•</span>
@@ -184,15 +186,18 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           2. MINIMAL CLEAN NAVIGATION WITH ORIGINAL MAIN LOGO
           ------------------------------------------------------------------ */}
-      <header className="sticky top-0 z-50 bg-[#1F1712]/90 backdrop-blur-md border-b border-amber-500/15 px-4 sm:px-8 py-3.5 transition-all">
+      <header className="sticky top-0 z-40 bg-[#1F1712]/95 backdrop-blur-md border-b border-amber-500/15 px-4 sm:px-8 py-3 transition-all">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Main Logo Branding */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-amber-400/50 bg-[#C04403] p-0.5 shrink-0 shadow-md group-hover:scale-105 transition-transform">
-              <img
-                src="/logo-original.png"
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-amber-400/50 bg-[#C04403] p-0.5 shrink-0 shadow-md group-hover:scale-105 transition-transform relative">
+              <Image
+                src="/logo-thumb.webp"
                 alt="Shyam Mangaram Foundation Main Logo"
+                width={44}
+                height={44}
                 className="w-full h-full object-cover rounded-full"
+                priority
               />
             </div>
             <div>
@@ -206,7 +211,7 @@ export default function Home() {
           </a>
 
           {/* Minimal Nav Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-white/80">
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-white/80">
             <a href="#langad" className="hover:text-amber-300 transition-colors">
               Sunday Langad
             </a>
@@ -224,22 +229,70 @@ export default function Home() {
             </a>
           </nav>
 
-          {/* Action */}
-          <div className="flex items-center gap-3">
+          {/* Action & Mobile Toggle */}
+          <div className="flex items-center gap-2 sm:gap-3">
             <a
               href="#donate"
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-full transition-all shadow-md active:scale-95"
+              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold text-xs uppercase tracking-wider px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all shadow-md active:scale-95"
             >
               Donate Seva
             </a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-white/80 hover:text-white rounded-lg border border-amber-500/20"
+              aria-label="Toggle Menu"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden pt-4 pb-3 border-t border-amber-500/15 mt-3 space-y-2 text-center text-xs uppercase tracking-wider font-semibold">
+            <a
+              href="#langad"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-white/90 hover:text-amber-300"
+            >
+              Sunday Langad (Free of Cost)
+            </a>
+            <a
+              href="#gaushala"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-amber-300 font-bold"
+            >
+              Gaushala Seva
+            </a>
+            <a
+              href="#hanumanji"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-white/90 hover:text-amber-300"
+            >
+              Black Hanuman Ji
+            </a>
+            <a
+              href="#mandirs"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-white/90 hover:text-amber-300"
+            >
+              Temples (Goa &amp; Mumbai)
+            </a>
+            <a
+              href="#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-white/90 hover:text-amber-300"
+            >
+              Volunteer &amp; Contact
+            </a>
+          </div>
+        )}
       </header>
 
       {/* ------------------------------------------------------------------
           3. MINIMAL HERO: TRANSPARENT LOGO + BLURRED TEMPLE BG
           ------------------------------------------------------------------ */}
-      <section className="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-16 overflow-hidden">
+      <section className="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-12 sm:py-16 overflow-hidden">
         {/* Blurred Temple Video Background Layer */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <video
@@ -247,7 +300,7 @@ export default function Home() {
             loop
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             poster="/black-hanuman-ji.webp"
             className="w-full h-full object-cover scale-110 filter blur-lg opacity-35 brightness-95"
           >
@@ -260,33 +313,39 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-          {/* Centered Transparent Golden Logo */}
-          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md mb-6">
+          {/* Centered Transparent Golden Logo (Optimized WebP, 72KB instead of 1.3MB) */}
+          <div className="relative w-full max-w-[220px] sm:max-w-xs md:max-w-sm mb-4 sm:mb-6">
             <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-2xl pointer-events-none" />
-            <img
-              src="/logo-transparent.png"
-              alt="Shyam Mangaram Foundation Sacred Emblem"
-              className="relative w-full h-auto object-contain filter drop-shadow-[0_12px_30px_rgba(245,158,11,0.35)]"
-            />
+            <picture>
+              <source srcSet="/logo-transparent.webp" type="image/webp" />
+              <img
+                src="/logo-transparent.png"
+                alt="Shyam Mangaram Foundation Sacred Emblem"
+                width={384}
+                height={384}
+                className="relative w-full h-auto object-contain filter drop-shadow-[0_12px_30px_rgba(245,158,11,0.35)]"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
 
           {/* Sanskrit Creed - Prominent & Enlarged */}
-          <div className="sanskrit-text text-xl sm:text-3xl text-amber-300 font-bold mb-4 tracking-wide">
+          <div className="sanskrit-text text-2xl sm:text-4xl text-amber-300 font-bold mb-3 sm:mb-4 tracking-wide">
             ॥ सेवा ही हमारा धर्म है ॥
           </div>
 
           {/* Purpose Statement */}
-          <p className="text-sm sm:text-base md:text-lg text-[#FCF8F2]/85 font-light leading-relaxed max-w-2xl mb-8">
+          <p className="text-xs sm:text-base md:text-lg text-[#FCF8F2]/85 font-light leading-relaxed max-w-2xl mb-6 sm:mb-8 px-2">
             Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad in Chembur served free of cost to the needy</strong>, nurturing holy cows with daily devotion through our <strong className="text-amber-400 font-medium">Pavitra Gaushala Seva</strong>, and anchoring devotees in the divine grace of the <strong className="text-amber-300 font-medium">Black Hanuman Ji</strong> and our sacred mandirs in <strong className="text-amber-300 font-medium">Goa and Mumbai</strong>.
           </p>
 
           {/* Actions */}
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-4 sm:px-0">
             <a
               href="#donate"
-              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
+              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
             >
-              <Heart size={16} className="fill-white" />
+              <Heart size={16} className="fill-white shrink-0" />
               <span>Sponsor Food &amp; Gaushala Seva</span>
             </a>
 
@@ -294,29 +353,29 @@ export default function Home() {
               onClick={() => setIsVideoModalOpen(true)}
               className="w-full sm:w-auto bg-[#261C16]/80 hover:bg-[#32251D] border border-amber-400/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-md transition-all cursor-pointer"
             >
-              <Play size={14} className="fill-amber-300 text-amber-300" />
+              <Play size={14} className="fill-amber-300 text-amber-300 shrink-0" />
               <span>Watch Temple Darshan</span>
             </button>
           </div>
         </div>
 
         {/* Stats Row */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto mt-14 pt-8 border-t border-amber-500/15 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-300 mb-0.5">3,500+</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Free Meals Every Sunday</div>
+        <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-amber-500/15 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+          <div className="p-2">
+            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-300 mb-0.5">3,500+</div>
+            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Free Meals Every Sunday</div>
           </div>
-          <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-400 mb-0.5">Gaushala</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Daily Gau Mata Seva</div>
+          <div className="p-2">
+            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-400 mb-0.5">Gaushala</div>
+            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Daily Gau Mata Seva</div>
           </div>
-          <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-200 mb-0.5">2 Mandirs</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Goa and Mumbai</div>
+          <div className="p-2">
+            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-200 mb-0.5">2 Mandirs</div>
+            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Goa and Mumbai</div>
           </div>
-          <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-orange-400 mb-0.5">100% Satvik</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Pure Ghee Seva</div>
+          <div className="p-2">
+            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-orange-400 mb-0.5">100% Satvik</div>
+            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Pure Ghee Seva</div>
           </div>
         </div>
       </section>
@@ -324,10 +383,10 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           4. SUNDAY LANGAD SEVA (FREE OF COST TO THE NEEDY)
           ------------------------------------------------------------------ */}
-      <section id="langad" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
+      <section id="langad" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="sanskrit-text text-sm sm:text-base text-amber-300 font-semibold block mb-2">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span className="sanskrit-text text-base sm:text-lg text-amber-300 font-semibold block mb-2">
               ॥ अन्नदानं महादानम् ॥
             </span>
             <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
@@ -339,8 +398,8 @@ export default function Home() {
           </div>
 
           {/* Minimal 3-Column Highlights */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-10 sm:mb-12">
+            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
               <span className="text-amber-400 font-serif text-lg block mb-1">01.</span>
               <h3 className="text-base font-bold text-white mb-2">100% Free of Cost</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
@@ -348,7 +407,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6">
+            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
               <span className="text-amber-400 font-serif text-lg block mb-1">02.</span>
               <h3 className="text-base font-bold text-white mb-2">Pure Satvik Nutrition</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
@@ -356,7 +415,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6">
+            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
               <span className="text-amber-400 font-serif text-lg block mb-1">03.</span>
               <h3 className="text-base font-bold text-white mb-2">Unbroken 52 Weeks</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
@@ -366,9 +425,9 @@ export default function Home() {
           </div>
 
           {/* Callout Banner */}
-          <div className="border border-amber-500/30 bg-[#261D17] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div className="border border-amber-500/30 bg-[#261D17] rounded-2xl p-5 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 text-center sm:text-left">
             <div>
-              <div className="cinzel-heading text-lg sm:text-xl font-bold text-white mb-1">
+              <div className="cinzel-heading text-base sm:text-xl font-bold text-white mb-1">
                 Just ₹501 Feeds 10 Needy Devotees This Sunday
               </div>
               <p className="text-xs text-[#FCF8F2]/70 font-light max-w-xl">
@@ -388,14 +447,14 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           5. GAUSHALA SEVA (HOLY GAU MATA SEVA)
           ------------------------------------------------------------------ */}
-      <section id="gaushala" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
+      <section id="gaushala" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
           {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
             <span className="sanskrit-text text-xl sm:text-3xl text-amber-300 font-bold block mb-2">
               ॥ गावः विश्वस्य मातरः ॥
             </span>
-            <div className="sanskrit-text text-base sm:text-xl text-amber-200/90 italic mb-4">
+            <div className="sanskrit-text text-sm sm:text-lg text-amber-200/90 italic mb-3">
               “धेनूनाम् अस्मि कामधुक्” — Among cows, I am Kamadhenu (Lord Krishna, Gita 10.28)
             </div>
             <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
@@ -407,9 +466,9 @@ export default function Home() {
           </div>
 
           {/* Narrative & Story Card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12 border border-amber-500/20 bg-[#211813] rounded-3xl p-6 sm:p-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center mb-10 sm:mb-12 border border-amber-500/20 bg-[#211813] rounded-3xl p-5 sm:p-10">
             <div className="space-y-4 text-xs sm:text-sm text-[#FCF8F2]/80 font-light leading-relaxed">
-              <h3 className="cinzel-heading text-lg sm:text-xl font-bold text-amber-200">
+              <h3 className="cinzel-heading text-base sm:text-xl font-bold text-amber-200">
                 The Sacred Abode of Compassion
               </h3>
               <p>
@@ -424,7 +483,7 @@ export default function Home() {
             </div>
 
             <div className="border border-amber-500/30 bg-[#1A120E] rounded-2xl p-6 text-center space-y-4">
-              <div className="text-4xl mx-auto mb-1">
+              <div className="text-4xl mx-auto mb-1" aria-hidden="true">
                 🐄
               </div>
               <h4 className="cinzel-heading text-base font-bold text-white">Daily Gaushala Seva Pledge</h4>
@@ -443,7 +502,7 @@ export default function Home() {
 
           {/* 4 Pillars of Gaushala Seva */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
+            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
               <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ ग्रास एवं गुड़</div>
               <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Daily Green Fodder</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
@@ -451,7 +510,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
+            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
               <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">पौष्टिक चोकर आहार</div>
               <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Nutritious Diet</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
@@ -459,7 +518,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
+            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
               <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौशाला आश्रय एवं स्वच्छता</div>
               <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Clean Shelter</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
@@ -467,7 +526,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
+            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
               <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ चिकित्सा सेवा</div>
               <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Medical &amp; Care</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
@@ -481,18 +540,21 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           6. THE SACRED BLACK HANUMAN JI
           ------------------------------------------------------------------ */}
-      <section id="hanumanji" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
+      <section id="hanumanji" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center">
             {/* Real Black Hanuman Ji Idol Photo */}
             <div className="relative border border-amber-500/30 bg-[#231A14] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
-              <div className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-400/50 mb-5 shadow-xl">
-                <img
+              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-400/50 mb-5 shadow-xl">
+                <Image
                   src="/black-hanuman-closeup.webp"
                   alt="Black Hanuman Ji Idol"
+                  width={240}
+                  height={240}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <span className="absolute bottom-2 left-2 right-2 text-center text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/60 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/30">
                   Divine Darshan
                 </span>
@@ -549,9 +611,9 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           7. MANDIRS GALLERY (2 MANDIRS: GOA AND MUMBAI)
           ------------------------------------------------------------------ */}
-      <section id="mandirs" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
+      <section id="mandirs" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-12">
+          <div className="text-center max-w-xl mx-auto mb-10 sm:mb-12">
             <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
               ॥ पवित्र धाम ॥
             </span>
@@ -563,17 +625,20 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
             {/* 1. Mumbai Mandir */}
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
                 <div className="relative w-full h-48 overflow-hidden">
-                  <img
+                  <Image
                     src="/shiva-darshan.webp"
                     alt="Chembur Mandir Mumbai"
+                    width={400}
+                    height={200}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent pointer-events-none" />
                   <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
                     Mumbai Mandir
                   </span>
@@ -584,13 +649,13 @@ export default function Home() {
                     The primary center for our Sunday Langad serving thousands of free meals to the needy, accompanied by regular morning Hanuman Chalisa recitations.
                   </p>
                   <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Chembur East, Mumbai</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Sunday Langad: 11:30 AM onwards</div>
+                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400 shrink-0" /> Chembur East, Mumbai</div>
+                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400 shrink-0" /> Sunday Langad: 11:30 AM onwards</div>
                   </div>
                 </div>
               </div>
               <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-500/30 rounded-xl">
+                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-500/30 rounded-xl hover:border-amber-400 transition-colors">
                   Sponsor Sunday Feast
                 </a>
               </div>
@@ -600,12 +665,15 @@ export default function Home() {
             <div className="border border-amber-500/30 bg-[#221914] rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
                 <div className="relative w-full h-48 overflow-hidden">
-                  <img
+                  <Image
                     src="/black-hanuman-ji.webp"
                     alt="Goa Mandir"
+                    width={400}
+                    height={200}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#221914] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#221914] via-transparent to-transparent pointer-events-none" />
                   <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
                     Goa Mandir
                   </span>
@@ -613,16 +681,16 @@ export default function Home() {
                 <div className="p-5">
                   <h3 className="text-base font-bold text-white mb-1.5">Goa Mandir Sanctuary</h3>
                   <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    A serene tropical temple sanctuary offering daily prayers, holy chants, and shelter &amp; peaceful darshan for visiting pilgrims and sadhus.
+                    A serene tropical temple sanctuary offering daily prayers, holy chants, and peaceful darshan for visiting pilgrims and sadhus.
                   </p>
                   <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Goa Temple Campus, Goa</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
+                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400 shrink-0" /> Goa Temple Campus, Goa</div>
+                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400 shrink-0" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
                   </div>
                 </div>
               </div>
               <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl">
+                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 rounded-xl transition-all">
                   Goa Mandir Seva
                 </a>
               </div>
@@ -634,9 +702,9 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           8. DONATION SUITE
           ------------------------------------------------------------------ */}
-      <section id="donate" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/20 bg-[#1B1410]">
+      <section id="donate" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/20 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center max-w-xl mx-auto mb-10">
+          <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
             <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
               ॥ पवित्र सहयोग ॥
             </span>
@@ -648,11 +716,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
             {/* Left 7 Cols: Seva Selection */}
-            <div className="lg:col-span-7 border border-amber-500/25 bg-[#211813] rounded-3xl p-6 sm:p-8">
+            <div className="lg:col-span-7 border border-amber-500/25 bg-[#211813] rounded-3xl p-5 sm:p-8">
               {/* Category Segmented Control */}
-              <div className="flex items-center justify-between gap-3 mb-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                 <span className="text-xs uppercase font-bold tracking-wider text-white">Select Seva</span>
                 <div className="flex items-center gap-1 bg-[#17110D] p-1 rounded-xl border border-amber-500/20">
                   <button
@@ -774,7 +842,7 @@ export default function Home() {
             </div>
 
             {/* Right 5 Cols: Payment QR & Details */}
-            <div className="lg:col-span-5 border border-amber-500/25 bg-[#211813] rounded-3xl p-6 sm:p-8 text-center flex flex-col items-center">
+            <div className="lg:col-span-5 border border-amber-500/25 bg-[#211813] rounded-3xl p-5 sm:p-8 text-center flex flex-col items-center">
               {/* Payment Method Switcher */}
               <div className="flex w-full bg-[#17110D] p-1 rounded-xl border border-amber-500/20 mb-5">
                 <button
@@ -808,6 +876,8 @@ export default function Home() {
                     <img
                       src={qrCodeUrl}
                       alt="Donation UPI QR Code"
+                      width={224}
+                      height={224}
                       className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg"
                     />
                   </div>
@@ -885,7 +955,7 @@ export default function Home() {
       {/* ------------------------------------------------------------------
           9. VOLUNTEER & CONTACT
           ------------------------------------------------------------------ */}
-      <section id="contact" className="py-16 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D] text-center">
+      <section id="contact" className="py-14 sm:py-16 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D] text-center">
         <div className="max-w-3xl mx-auto">
           <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
             ॥ सेवा में जुड़ें ॥
@@ -923,10 +993,13 @@ export default function Home() {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-3.5">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-amber-400/50 bg-[#C04403] p-0.5 shrink-0 shadow">
-              <img
-                src="/logo-original.png"
+              <Image
+                src="/logo-thumb.webp"
                 alt="Shyam Mangaram Foundation Logo"
+                width={48}
+                height={48}
                 className="w-full h-full object-cover rounded-full"
+                loading="lazy"
               />
             </div>
             <div>
@@ -939,7 +1012,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-amber-200/80">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-amber-200/80">
             <a href="#langad" className="hover:text-white transition-colors">Sunday Langad</a>
             <a href="#gaushala" className="hover:text-white transition-colors text-amber-300 font-semibold">Gaushala Seva</a>
             <a href="#hanumanji" className="hover:text-white transition-colors">Black Hanuman Ji</a>

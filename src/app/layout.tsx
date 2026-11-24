@@ -5,18 +5,18 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://shyammangaramfoundation.org"),
   title: "Shyam Mangaram Foundation | सेवा ही हमारा धर्म है",
   description:
-    "Shyam Mangaram Foundation — Feeding thousands of devotees every Sunday through Langad in Chembur, Mumbai, and dedicated to daily Pashu-Pakshi (Animal) Seva. Home to sacred temples in Goa and the rare Black Hanuman Ji in Sindhudurg.",
+    "Shyam Mangaram Foundation — Dedicated to Sunday Langad in Chembur, Mumbai served free of cost to the needy, sacred Pavitra Gaushala Seva, the miraculous Black Hanuman Ji, and sacred Mandirs in Goa and Mumbai.",
   keywords: [
     "Shyam Mangaram Foundation",
     "Sunday Langad Chembur",
+    "Free Food Needy Mumbai",
+    "Gaushala Seva",
+    "Gau Mata Seva",
+    "Black Hanuman Ji",
     "Chembur Mandir Mumbai",
-    "Black Hanuman Ji Sindhudurg",
-    "Goa Temple",
-    "Animal Seva Mumbai",
-    "Street dog feeding Mumbai",
-    "Gau Seva",
-    "Anna Daan Donation",
-    "Hanuman Mandir Seva",
+    "Goa Mandir",
+    "Anna Daan Seva",
+    "Trust Donation",
   ],
   icons: {
     icon: "/favicon.ico",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shyam Mangaram Foundation | सेवा ही हमारा धर्म है",
     description:
-      "Feeding thousands every Sunday in Chembur and daily feeding & caring for street dogs, cows, and birds as manifestations of God. Donate to support sacred Seva.",
+      "Sunday Langad in Chembur served free of cost to the needy, daily Pavitra Gaushala Seva, the divine Black Hanuman Ji, and holy sanctuaries in Goa and Mumbai.",
     type: "website",
     locale: "en_IN",
     images: ["/logo-original.png"],
@@ -47,9 +47,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+        <meta name="theme-color" content="#18120E" />
       </head>
       <body
-        className="min-h-screen bg-[#19130F] text-[#FCF8F2] antialiased selection:bg-amber-400 selection:text-[#19130F]"
+        className="min-h-screen bg-[#18120E] text-[#FCF8F2] antialiased selection:bg-amber-400 selection:text-[#18120E] overflow-x-hidden"
         suppressHydrationWarning
       >
         {children}
