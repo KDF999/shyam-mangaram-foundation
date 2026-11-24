@@ -188,8 +188,8 @@ export default function Home() {
               <span className="playfair-heading font-bold text-sm sm:text-base text-white block leading-tight group-hover:text-amber-300 transition-colors">
                 Shyam Mangaram
               </span>
-              <span className="sanskrit-text text-xs sm:text-sm text-amber-300/90 block leading-tight">
-                सेवा ही हमारा धर्म है
+              <span className="text-[11px] text-amber-400/70 block leading-tight tracking-widest uppercase" style={{ fontFamily: "'Lato', sans-serif" }}>
+                Foundation
               </span>
             </div>
           </a>
