@@ -5,14 +5,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://shyammangaramfoundation.org"),
   title: "Shyam Mangaram Foundation | सेवा ही हमारा धर्म है",
   description:
-    "Shyam Mangaram Foundation — Dedicated to Sunday Langad in Chembur, Mumbai served free of cost to the needy, sacred Pavitra Gaushala Seva, the miraculous Black Hanuman Ji, and sacred Mandirs in Goa and Mumbai.",
+    "Shyam Mangaram Foundation — Dedicated to Sunday Langad in Chembur, Mumbai served free of cost to the needy, sacred Pavitra Gaushala Seva, the divine Hanuman Mandir, and sacred sanctuaries in Goa and Mumbai.",
   keywords: [
     "Shyam Mangaram Foundation",
     "Sunday Langad Chembur",
     "Free Food Needy Mumbai",
     "Gaushala Seva",
     "Gau Mata Seva",
-    "Black Hanuman Ji",
+    "Hanuman Mandir",
     "Chembur Mandir Mumbai",
     "Goa Mandir",
     "Anna Daan Seva",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shyam Mangaram Foundation | सेवा ही हमारा धर्म है",
     description:
-      "Sunday Langad in Chembur served free of cost to the needy, daily Pavitra Gaushala Seva, the divine Black Hanuman Ji, and holy sanctuaries in Goa and Mumbai.",
+      "Sunday Langad in Chembur served free of cost to the needy, daily Pavitra Gaushala Seva, the divine Hanuman Mandir, and holy sanctuaries in Goa and Mumbai.",
     type: "website",
     locale: "en_IN",
     images: ["/logo-original.png"],

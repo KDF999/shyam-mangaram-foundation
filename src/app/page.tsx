@@ -219,7 +219,7 @@ export default function Home() {
               Gaushala Seva
             </a>
             <a href="#hanumanji" className="hover:text-amber-300 transition-colors">
-              Black Hanuman Ji
+              Hanuman Mandir
             </a>
             <a href="#mandirs" className="hover:text-amber-300 transition-colors">
               Temples
@@ -269,7 +269,7 @@ export default function Home() {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-white/90 hover:text-amber-300"
             >
-              Black Hanuman Ji
+              Hanuman Mandir
             </a>
             <a
               href="#mandirs"
@@ -336,7 +336,7 @@ export default function Home() {
 
           {/* Purpose Statement */}
           <p className="text-xs sm:text-base md:text-lg text-[#FCF8F2]/85 font-light leading-relaxed max-w-2xl mb-6 sm:mb-8 px-2">
-            Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad in Chembur served free of cost to the needy</strong>, nurturing holy cows with daily devotion through our <strong className="text-amber-400 font-medium">Pavitra Gaushala Seva</strong>, and anchoring devotees in the divine grace of the <strong className="text-amber-300 font-medium">Black Hanuman Ji</strong> and our sacred mandirs in <strong className="text-amber-300 font-medium">Goa and Mumbai</strong>.
+            Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad in Chembur served free of cost to the needy</strong>, nurturing holy cows with daily devotion through our <strong className="text-amber-400 font-medium">Pavitra Gaushala Seva</strong>, and anchoring devotees in the divine grace of our <strong className="text-amber-300 font-medium">Hanuman Mandir</strong> and sacred sanctuaries in <strong className="text-amber-300 font-medium">Goa and Mumbai</strong>.
           </p>
 
           {/* Actions */}
@@ -538,17 +538,17 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          6. THE SACRED BLACK HANUMAN JI
+          6. THE SACRED HANUMAN MANDIR
           ------------------------------------------------------------------ */}
       <section id="hanumanji" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center">
-            {/* Real Black Hanuman Ji Idol Photo */}
+            {/* Hanuman Ji Idol Photo */}
             <div className="relative border border-amber-500/30 bg-[#231A14] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
               <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-400/50 mb-5 shadow-xl">
                 <Image
                   src="/black-hanuman-closeup.webp"
-                  alt="Black Hanuman Ji Idol"
+                  alt="Hanuman Mandir Idol"
                   width={240}
                   height={240}
                   className="w-full h-full object-cover"
@@ -571,16 +571,16 @@ export default function Home() {
             {/* Narrative */}
             <div className="space-y-4">
               <span className="text-xs uppercase font-bold tracking-widest text-amber-400">
-                Miraculous Shrine
+                Pavitra Dham
               </span>
               <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white">
-                The Sacred Black Hanuman Ji
+                The Sacred Hanuman Mandir
               </h2>
               <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                This sacred sanctuary hosts the miraculous murti of Lord Hanuman. Radiating immense peace, strength, and protection, the shrine is deeply revered by devotees from all walks of life.
+                This sacred sanctuary hosts the consecrated murti of Lord Hanuman. The temple is especially revered for its rare black stone idol, radiating profound spiritual stillness, strength, and divine protection.
               </p>
               <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                Devotees visit to seek courage, focus, and blessings for peace and obstacle removal. The foundation upholds daily Vedic aartis, Akhand Jyot, and traditional prasad distributions here.
+                Devotees visit to seek courage, inner peace, and blessings for obstacle removal. The foundation upholds daily Vedic aartis, Akhand Jyot, and traditional prasad distributions here.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-6 text-xs text-amber-300/90 font-medium">
@@ -1015,7 +1015,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-amber-200/80">
             <a href="#langad" className="hover:text-white transition-colors">Sunday Langad</a>
             <a href="#gaushala" className="hover:text-white transition-colors text-amber-300 font-semibold">Gaushala Seva</a>
-            <a href="#hanumanji" className="hover:text-white transition-colors">Black Hanuman Ji</a>
+            <a href="#hanumanji" className="hover:text-white transition-colors">Hanuman Mandir</a>
             <a href="#mandirs" className="hover:text-white transition-colors">Temples</a>
             <a href="#donate" className="hover:text-white transition-colors text-amber-300 font-semibold">Donate</a>
           </div>
