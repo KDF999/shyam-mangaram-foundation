@@ -11,7 +11,7 @@
     scroll-behavior: smooth;
     background-color: #18120E;
     color: #FCF8F2;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Lato', 'Segoe UI', system-ui, -apple-system, sans-serif;
   }
 
   body {
@@ -46,9 +46,25 @@
   line-height: 1.6;
 }
 
+/* Playfair Display for editorial headings */
+.playfair-heading {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+
+/* Cormorant Garamond for warm body prose and subtext */
+.cormorant-body {
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 1.1em;
+  letter-spacing: 0.01em;
+  line-height: 1.75;
+}
+
+/* Legacy class — keep for compat, now points to Playfair */
 .cinzel-heading {
-  font-family: 'Cinzel', 'Georgia', serif;
-  letter-spacing: 0.05em;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  letter-spacing: 0.02em;
 }
 
 /* Devotional Gradient Text */

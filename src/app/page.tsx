@@ -9,9 +9,6 @@ import {
   Check,
   MapPin,
   Clock,
-  Sparkles,
-  Phone,
-  Mail,
   ShieldCheck,
   ChevronRight,
   Play,
@@ -30,7 +27,6 @@ interface SevaTier {
 }
 
 const SEVA_TIERS: SevaTier[] = [
-  // Sunday Langad Tiers
   {
     id: "feed-10",
     name: "Anna Daan Seva",
@@ -42,7 +38,7 @@ const SEVA_TIERS: SevaTier[] = [
     id: "bhog-seva",
     name: "Prasad & Bhog Seva",
     amount: 1100,
-    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti and free distribution to devotees",
+    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti and free distribution to all",
     category: "langad",
   },
   {
@@ -67,7 +63,6 @@ const SEVA_TIERS: SevaTier[] = [
     impact: "Co-sponsors the entire Sunday feast feeding over 500+ needy devotees completely free of cost",
     category: "langad",
   },
-  // Gaushala Seva Tiers
   {
     id: "gau-grass",
     name: "Gau Grass & Gud Seva",
@@ -117,17 +112,11 @@ export default function Home() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  const [donorForm, setDonorForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    pan: "",
-  });
+  const [donorForm, setDonorForm] = useState({ name: "", phone: "", email: "", pan: "" });
   const [donationSubmitted, setDonationSubmitted] = useState<boolean>(false);
 
   const UPI_ID = "shyammangaramfoundation@sbi";
   const UPI_NAME = "Shyam Mangaram Foundation";
-
   const effectiveAmount = isCustom ? Number(customAmount) || 0 : selectedAmount;
 
   const upiDeepLink = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(
@@ -158,42 +147,37 @@ export default function Home() {
     setDonationSubmitted(true);
   };
 
-  const filteredTiers = selectedCategory === "all"
-    ? SEVA_TIERS
-    : SEVA_TIERS.filter((t) => t.category === selectedCategory);
+  const filteredTiers =
+    selectedCategory === "all" ? SEVA_TIERS : SEVA_TIERS.filter((t) => t.category === selectedCategory);
 
   return (
-    <main className="min-h-screen bg-[#18120E] text-[#FCF8F2] selection:bg-amber-400 selection:text-black font-sans antialiased overflow-x-hidden">
-      {/* ------------------------------------------------------------------
-          1. SACRED TOP BANNER (INCREASED SANSKRIT FONT SIZE)
-          ------------------------------------------------------------------ */}
-      <div className="bg-gradient-to-r from-[#832607] via-[#B45309] to-[#832607] text-white py-2 px-3 sm:px-4 text-center border-b border-amber-400/20 shadow-sm flex items-center justify-center gap-2 sm:gap-3">
-        <span className="sanskrit-text text-sm sm:text-lg font-bold text-amber-200 tracking-wide shrink-0">
+    <main className="min-h-screen bg-[#18120E] text-[#FCF8F2] selection:bg-amber-400 selection:text-black antialiased overflow-x-hidden">
+
+      {/* ── TOP ANNOUNCEMENT STRIP ───────────────────────────────────────── */}
+      <div className="bg-gradient-to-r from-[#7A2305] via-[#A84B08] to-[#7A2305] text-white py-2 px-3 sm:px-4 text-center border-b border-amber-600/20 flex items-center justify-center gap-2 sm:gap-3">
+        <span className="sanskrit-text text-sm sm:text-base font-semibold text-amber-200 tracking-wide shrink-0">
           ॥ ॐ श्री हनुमते नमः ॥
         </span>
-        <span className="hidden sm:inline text-amber-300/40">•</span>
-        <span className="text-xs sm:text-sm text-white/90 font-medium truncate">
-          Sunday Langad in Chembur (Free of Cost) &amp; Pavitra Gaushala Seva
+        <span className="hidden sm:inline text-amber-500/40 text-xs">•</span>
+        <span className="text-xs sm:text-sm text-white/80 font-light truncate" style={{ fontFamily: "'Lato', sans-serif" }}>
+          Sunday Langad in Chembur &mdash; Free of Cost &nbsp;&amp;&nbsp; Pavitra Gaushala Seva
         </span>
         <a
           href="#donate"
-          className="hidden md:inline-flex items-center gap-1 text-xs uppercase font-bold tracking-wider text-amber-200 hover:text-white underline ml-1"
+          className="hidden md:inline-flex items-center gap-1 text-xs font-semibold tracking-wider text-amber-300 hover:text-white underline underline-offset-2 ml-2"
         >
-          Sponsor Seva <ArrowRight size={12} />
+          Sponsor Seva <ArrowRight size={11} />
         </a>
       </div>
 
-      {/* ------------------------------------------------------------------
-          2. MINIMAL CLEAN NAVIGATION WITH ORIGINAL MAIN LOGO
-          ------------------------------------------------------------------ */}
-      <header className="sticky top-0 z-40 bg-[#1F1712]/95 backdrop-blur-md border-b border-amber-500/15 px-4 sm:px-8 py-3 transition-all">
+      {/* ── NAVIGATION ───────────────────────────────────────────────────── */}
+      <header className="sticky top-0 z-40 bg-[#1C1510]/95 backdrop-blur-md border-b border-amber-700/20 px-4 sm:px-8 py-3">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          {/* Main Logo Branding */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-amber-400/50 bg-[#C04403] p-0.5 shrink-0 shadow-md group-hover:scale-105 transition-transform relative">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-amber-500/50 bg-[#B83E03] p-0.5 shrink-0 shadow group-hover:scale-105 transition-transform">
               <Image
                 src="/logo-thumb.webp"
-                alt="Shyam Mangaram Foundation Main Logo"
+                alt="Shyam Mangaram Foundation"
                 width={44}
                 height={44}
                 className="w-full h-full object-cover rounded-full"
@@ -201,7 +185,7 @@ export default function Home() {
               />
             </div>
             <div>
-              <span className="cinzel-heading font-bold text-sm sm:text-base tracking-wide text-white block leading-tight group-hover:text-amber-300 transition-colors">
+              <span className="playfair-heading font-bold text-sm sm:text-base text-white block leading-tight group-hover:text-amber-300 transition-colors">
                 Shyam Mangaram
               </span>
               <span className="sanskrit-text text-xs sm:text-sm text-amber-300/90 block leading-tight">
@@ -210,36 +194,25 @@ export default function Home() {
             </div>
           </a>
 
-          {/* Minimal Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-white/80">
-            <a href="#langad" className="hover:text-amber-300 transition-colors">
-              Sunday Langad
-            </a>
-            <a href="#gaushala" className="hover:text-amber-300 transition-colors text-amber-300 font-bold">
-              Gaushala Seva
-            </a>
-            <a href="#hanumanji" className="hover:text-amber-300 transition-colors">
-              Hanuman Mandir
-            </a>
-            <a href="#mandirs" className="hover:text-amber-300 transition-colors">
-              Temples
-            </a>
-            <a href="#contact" className="hover:text-amber-300 transition-colors">
-              Volunteer
-            </a>
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-widest text-white/70" style={{ fontFamily: "'Lato', sans-serif" }}>
+            <a href="#langad" className="hover:text-amber-300 transition-colors">Sunday Langad</a>
+            <a href="#gaushala" className="hover:text-amber-300 transition-colors text-amber-300">Gaushala Seva</a>
+            <a href="#hanumanji" className="hover:text-amber-300 transition-colors">Hanuman Mandir</a>
+            <a href="#mandirs" className="hover:text-amber-300 transition-colors">Mandirs</a>
+            <a href="#what-we-stand-for" className="hover:text-amber-300 transition-colors">Our Belief</a>
           </nav>
 
-          {/* Action & Mobile Toggle */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2">
             <a
               href="#donate"
-              className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold text-xs uppercase tracking-wider px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all shadow-md active:scale-95"
+              className="saffron-btn-gradient text-white font-bold text-xs uppercase tracking-wider px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all shadow active:scale-95"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
-              Donate Seva
+              Donate
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-white/80 hover:text-white rounded-lg border border-amber-500/20"
+              className="lg:hidden p-2 text-white/70 hover:text-white rounded-lg border border-amber-700/30"
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -247,196 +220,239 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden pt-4 pb-3 border-t border-amber-500/15 mt-3 space-y-2 text-center text-xs uppercase tracking-wider font-semibold">
-            <a
-              href="#langad"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white/90 hover:text-amber-300"
-            >
-              Sunday Langad (Free of Cost)
-            </a>
-            <a
-              href="#gaushala"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-amber-300 font-bold"
-            >
-              Gaushala Seva
-            </a>
-            <a
-              href="#hanumanji"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white/90 hover:text-amber-300"
-            >
-              Hanuman Mandir
-            </a>
-            <a
-              href="#mandirs"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white/90 hover:text-amber-300"
-            >
-              Temples (Goa &amp; Mumbai)
-            </a>
-            <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white/90 hover:text-amber-300"
-            >
-              Volunteer &amp; Contact
-            </a>
+          <div className="lg:hidden pt-4 pb-3 border-t border-amber-700/20 mt-3 space-y-1 text-center" style={{ fontFamily: "'Lato', sans-serif" }}>
+            {[
+              { href: "#langad", label: "Sunday Langad" },
+              { href: "#gaushala", label: "Gaushala Seva" },
+              { href: "#hanumanji", label: "Hanuman Mandir" },
+              { href: "#mandirs", label: "Mandirs" },
+              { href: "#what-we-stand-for", label: "Our Belief" },
+              { href: "#contact", label: "Volunteer" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 text-sm text-white/80 hover:text-amber-300 uppercase tracking-widest font-semibold"
+              >
+                {label}
+              </a>
+            ))}
           </div>
         )}
       </header>
 
-      {/* ------------------------------------------------------------------
-          3. MINIMAL HERO: TRANSPARENT LOGO + BLURRED TEMPLE BG
-          ------------------------------------------------------------------ */}
-      <section className="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-8 py-12 sm:py-16 overflow-hidden">
-        {/* Blurred Temple Video Background Layer */}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      <section className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden" style={{ minHeight: 'calc(100dvh - 96px)', paddingTop: '3rem', paddingBottom: '3rem' }}>
+        {/* Blurred video background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
+            autoPlay loop muted playsInline preload="none"
             poster="/black-hanuman-ji.webp"
-            className="w-full h-full object-cover scale-110 filter blur-lg opacity-35 brightness-95"
+            className="w-full h-full object-cover scale-110 blur-xl opacity-30 brightness-90"
           >
             <source src="/temple-bg.mp4" type="video/mp4" />
           </video>
-          {/* Subtle Golden Warm Radial Glow */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1E1712]/70 to-[#18120E]/80" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.18)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/65 to-[#18120E]/75" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.15)_0%,transparent_65%)]" />
         </div>
 
-        {/* Hero Content */}
+        {/* Content */}
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-          {/* Centered Transparent Golden Logo (Optimized WebP, 72KB instead of 1.3MB) */}
-          <div className="relative w-full max-w-[220px] sm:max-w-xs md:max-w-sm mb-4 sm:mb-6">
-            <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-2xl pointer-events-none" />
+          {/* Hero logo */}
+          <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm mb-5 sm:mb-7">
+            <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
             <picture>
               <source srcSet="/logo-transparent.webp" type="image/webp" />
               <img
                 src="/logo-transparent.png"
-                alt="Shyam Mangaram Foundation Sacred Emblem"
+                alt="Shyam Mangaram Foundation"
                 width={384}
                 height={384}
-                className="relative w-full h-auto object-contain filter drop-shadow-[0_12px_30px_rgba(245,158,11,0.35)]"
+                className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
                 fetchPriority="high"
               />
             </picture>
           </div>
 
-          {/* Sanskrit Creed - Prominent & Enlarged */}
-          <div className="sanskrit-text text-2xl sm:text-4xl text-amber-300 font-bold mb-3 sm:mb-4 tracking-wide">
-            ॥ सेवा ही हमारा धर्म है ॥
+          {/* Sanskrit mantra */}
+          <div className="mb-1">
+            <div className="sanskrit-text text-2xl sm:text-4xl text-amber-300 font-bold tracking-wide">
+              ॥ सेवा ही हमारा धर्म है ॥
+            </div>
+            <div className="text-xs sm:text-sm text-amber-200/60 mt-1 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+              Service is our highest duty — this is our faith, our practice, and our path.
+            </div>
           </div>
 
-          {/* Purpose Statement */}
-          <p className="text-xs sm:text-base md:text-lg text-[#FCF8F2]/85 font-light leading-relaxed max-w-2xl mb-6 sm:mb-8 px-2">
-            Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad in Chembur served free of cost to the needy</strong>, nurturing holy cows with daily devotion through our <strong className="text-amber-400 font-medium">Pavitra Gaushala Seva</strong>, and anchoring devotees in the divine grace of our <strong className="text-amber-300 font-medium">Hanuman Mandir</strong> and sacred sanctuaries in <strong className="text-amber-300 font-medium">Goa and Mumbai</strong>.
+          {/* Tagline */}
+          <p className="mt-6 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
+            We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
           </p>
 
-          {/* Actions */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-4 sm:px-0">
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-2 sm:px-0">
             <a
               href="#donate"
-              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 sm:px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
+              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
-              <Heart size={16} className="fill-white shrink-0" />
-              <span>Sponsor Food &amp; Gaushala Seva</span>
+              <Heart size={15} className="fill-white shrink-0" />
+              Sponsor Food &amp; Gaushala Seva
             </a>
-
             <button
               onClick={() => setIsVideoModalOpen(true)}
-              className="w-full sm:w-auto bg-[#261C16]/80 hover:bg-[#32251D] border border-amber-400/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-md transition-all cursor-pointer"
+              className="w-full sm:w-auto bg-[#28201A]/80 hover:bg-[#342820] border border-amber-600/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
-              <Play size={14} className="fill-amber-300 text-amber-300 shrink-0" />
-              <span>Watch Temple Darshan</span>
+              <Play size={13} className="fill-amber-300 text-amber-300 shrink-0" />
+              Watch Temple Darshan
             </button>
           </div>
         </div>
 
-        {/* Stats Row */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-amber-500/15 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
-          <div className="p-2">
-            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-300 mb-0.5">3,500+</div>
-            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Free Meals Every Sunday</div>
+      </section>
+
+      {/* ── WHAT WE STAND FOR (SANATAN DHARMA) ───────────────────────────── */}
+      <section id="what-we-stand-for" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#161008]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span className="sanskrit-text text-base sm:text-lg text-amber-400 font-semibold block mb-2">
+              ॥ धर्मो रक्षति रक्षितः ॥
+            </span>
+            <p className="text-xs text-amber-200/50 italic mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              "He who protects Dharma is protected by Dharma." — Manusmriti
+            </p>
+            <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white mb-4">
+              What We Stand For
+            </h2>
+            <p className="text-sm sm:text-base text-[#FCF8F2]/75 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)" }}>
+              The Shyam Mangaram Foundation is rooted in the living tradition of <strong className="text-amber-300 font-medium">Sanatan Dharma</strong> — the eternal, universal way of righteous living. We do not merely believe in scripture; we try, week after week, to <em>live</em> it. For us, faith is not a Sunday ritual — it is the food we cook at 5 AM, the water we carry to the Gaushala, the aarti flame that never goes out.
+            </p>
           </div>
-          <div className="p-2">
-            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-400 mb-0.5">Gaushala</div>
-            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Daily Gau Mata Seva</div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Pillar 1 */}
+            <div className="border border-amber-700/25 bg-[#1E1510] rounded-2xl p-6 sm:p-7 hover:border-amber-600/40 transition-colors">
+              <div className="sanskrit-text text-lg sm:text-xl text-amber-300 font-bold mb-1">
+                अहिंसा परमो धर्मः
+              </div>
+              <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+                "Non-violence is the highest duty."
+              </div>
+              <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">
+                Reverence for All Life
+              </h3>
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                We see the Divine in every living being — human, cow, bird, and street dog alike. Our Gaushala Seva and Pashu care are not charity; they are an act of worship. To serve a Gau Mata is to offer a prayer.
+              </p>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className="border border-amber-700/25 bg-[#1E1510] rounded-2xl p-6 sm:p-7 hover:border-amber-600/40 transition-colors">
+              <div className="sanskrit-text text-lg sm:text-xl text-amber-300 font-bold mb-1">
+                अन्नं ब्रह्म
+              </div>
+              <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+                "Food itself is Brahman — the highest, formless God."
+              </div>
+              <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">
+                Anna Daan as Divine Act
+              </h3>
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                Our Sunday Langad is not a soup kitchen. It is a sacred offering. Every grain of rice cooked in that cauldron carries a prayer. Every person who eats — rich or poor, known or stranger — is seen as a guest of God.
+              </p>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className="border border-amber-700/25 bg-[#1E1510] rounded-2xl p-6 sm:p-7 hover:border-amber-600/40 transition-colors">
+              <div className="sanskrit-text text-lg sm:text-xl text-amber-300 font-bold mb-1">
+                सर्वे भवन्तु सुखिनः
+              </div>
+              <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+                "May all beings be happy, may all be free from suffering."
+              </div>
+              <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">
+                Seva Without Distinction
+              </h3>
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                Our langad has no VIP queue. No caste, no religion, no income — just one line, one plate, one family. That is Sanatan Dharma as we understand it. The highest worship is to serve, without expecting anything in return.
+              </p>
+            </div>
           </div>
-          <div className="p-2">
-            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-amber-200 mb-0.5">2 Mandirs</div>
-            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Goa and Mumbai</div>
-          </div>
-          <div className="p-2">
-            <div className="cinzel-heading text-xl sm:text-3xl font-bold text-orange-400 mb-0.5">100% Satvik</div>
-            <div className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#FCF8F2]/70 font-medium">Pure Ghee Seva</div>
+
+          {/* Pull-quote */}
+          <div className="mt-10 sm:mt-14 border-l-4 border-amber-500 pl-5 sm:pl-8 max-w-3xl mx-auto">
+            <p className="text-base sm:text-xl text-[#FCF8F2]/80 italic leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(1rem, 2vw, 1.3rem)" }}>
+              "We began with a small cauldron in Chembur and a conviction that feeding one hungry person is worth more than a thousand hours of debate about God. The rest has simply followed."
+            </p>
+            <div className="mt-3 text-xs uppercase tracking-widest text-amber-400 font-semibold" style={{ fontFamily: "'Lato', sans-serif" }}>
+              — Shyam Mangaram Foundation
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          4. SUNDAY LANGAD SEVA (FREE OF COST TO THE NEEDY)
-          ------------------------------------------------------------------ */}
-      <section id="langad" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
+      {/* ── SUNDAY LANGAD ────────────────────────────────────────────────── */}
+      <section id="langad" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-            <span className="sanskrit-text text-base sm:text-lg text-amber-300 font-semibold block mb-2">
+            <div className="sanskrit-text text-base sm:text-xl text-amber-300 font-semibold block mb-1">
               ॥ अन्नदानं महादानम् ॥
-            </span>
-            <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
+            </div>
+            <div className="text-xs text-amber-200/50 italic mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              "The gift of food is the greatest gift of all." — ancient Vedic saying
+            </div>
+            <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white mb-3">
               Sunday Langad in Chembur
             </h2>
-            <p className="text-xs sm:text-sm text-[#FCF8F2]/85 font-light leading-relaxed">
-              Every Sunday morning, the Chembur temple opens its doors to feed over 3,500 people. Clean, hot, satvik meals served <strong className="text-amber-300 font-semibold">free of cost to the needy</strong> with dignity and love to all.
+            <p className="text-sm sm:text-base text-[#FCF8F2]/75 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)" }}>
+              Every Sunday morning, the Chembur temple opens its gates wide. By 11:30 AM, the giant degs are bubbling — dal, sabzi, roti, rice, halwa. Over 3,500 people sit together and eat. It costs them nothing. No token, no ID, no form. Just a plate, served with both hands, and a smile.
             </p>
           </div>
 
-          {/* Minimal 3-Column Highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 mb-10 sm:mb-12">
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
-              <span className="text-amber-400 font-serif text-lg block mb-1">01.</span>
-              <h3 className="text-base font-bold text-white mb-2">100% Free of Cost</h3>
-              <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Every Sunday meal is served completely free of cost to the needy, senior citizens, children, and devotees without any distinction.
-              </p>
-            </div>
-
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
-              <span className="text-amber-400 font-serif text-lg block mb-1">02.</span>
-              <h3 className="text-base font-bold text-white mb-2">Pure Satvik Nutrition</h3>
-              <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Cooked with pure ghee, fresh seasonal vegetables, lentils, rice, rotis, and holy halwa prasad prepared under strict cleanliness.
-              </p>
-            </div>
-
-            <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-500/35 transition-colors">
-              <span className="text-amber-400 font-serif text-lg block mb-1">03.</span>
-              <h3 className="text-base font-bold text-white mb-2">Unbroken 52 Weeks</h3>
-              <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Rain, storms, or summer heat — the langad cauldrons are lit every Sunday without a single missed week over the years.
-              </p>
-            </div>
+            {[
+              {
+                num: "01.",
+                title: "Always Free of Cost",
+                body: "Every Sunday meal is served completely free to anyone who comes — the elderly, children, labourers, students, sadhus, and families. No questions asked.",
+              },
+              {
+                num: "02.",
+                title: "Pure Satvik Food",
+                body: "Cooked with pure desi ghee, fresh vegetables, and whole grains. No onion, no garlic. Hot dal, rice, rotis, and holy halwa prasad — prepared with care and devotion.",
+              },
+              {
+                num: "03.",
+                title: "Unbroken, Every Week",
+                body: "Rain or shine, festival or not — this langad has never missed a single Sunday. That consistency is itself a form of prayer, a commitment we made to God and the community.",
+              },
+            ].map(({ num, title, body }) => (
+              <div key={num} className="border border-amber-700/20 bg-[#221914] rounded-2xl p-6 hover:border-amber-600/35 transition-colors">
+                <span className="text-amber-500/80 font-serif text-lg block mb-1">{num}</span>
+                <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">{title}</h3>
+                <p className="text-xs sm:text-sm text-[#FCF8F2]/65 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>{body}</p>
+              </div>
+            ))}
           </div>
 
-          {/* Callout Banner */}
-          <div className="border border-amber-500/30 bg-[#261D17] rounded-2xl p-5 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 text-center sm:text-left">
+          {/* CTA banner */}
+          <div className="border border-amber-600/30 bg-[#261D17] rounded-2xl p-5 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
             <div>
-              <div className="cinzel-heading text-base sm:text-xl font-bold text-white mb-1">
-                Just ₹501 Feeds 10 Needy Devotees This Sunday
+              <div className="playfair-heading text-base sm:text-xl font-bold text-white mb-1">
+                ₹501 feeds 10 people this Sunday — free of cost.
               </div>
-              <p className="text-xs text-[#FCF8F2]/70 font-light max-w-xl">
-                Your contribution directly purchases grains, lentils, fresh produce, and ghee for the Sunday Langad feast served free of cost.
+              <p className="text-xs text-[#FCF8F2]/60 font-light max-w-xl" style={{ fontFamily: "'Lato', sans-serif" }}>
+                Your contribution goes directly into grains, ghee, fresh vegetables, and the fuel that keeps those degs burning every week.
               </p>
             </div>
             <a
               href="#donate"
-              className="saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider px-6 py-3 rounded-full shrink-0 shadow-md hover:scale-105 transition-transform"
+              className="saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider px-6 py-3 rounded-full shrink-0 shadow hover:scale-105 transition-transform"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
               Sponsor Free Meals
             </a>
@@ -444,163 +460,150 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          5. GAUSHALA SEVA (HOLY GAU MATA SEVA)
-          ------------------------------------------------------------------ */}
-      <section id="gaushala" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
+      {/* ── GAUSHALA SEVA ────────────────────────────────────────────────── */}
+      <section id="gaushala" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
-          {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-            <span className="sanskrit-text text-xl sm:text-3xl text-amber-300 font-bold block mb-2">
+            <div className="sanskrit-text text-xl sm:text-3xl text-amber-300 font-bold block mb-1">
               ॥ गावः विश्वस्य मातरः ॥
-            </span>
-            <div className="sanskrit-text text-sm sm:text-lg text-amber-200/90 italic mb-3">
-              “धेनूनाम् अस्मि कामधुक्” — Among cows, I am Kamadhenu (Lord Krishna, Gita 10.28)
             </div>
-            <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
+            <div className="text-xs text-amber-200/50 italic mb-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              "The cow is the mother of the entire world."
+            </div>
+            <div className="sanskrit-text text-sm sm:text-base text-amber-200/80 italic mb-5">
+              "धेनूनाम् अस्मि कामधुक्"
+            </div>
+            <div className="text-xs text-amber-200/50 italic mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              "Among all cows, I am Kamadhenu, the wish-fulfilling divine cow." — Lord Krishna, Bhagavad Gita 10.28
+            </div>
+            <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white mb-3">
               Pavitra Gaushala Seva
             </h2>
-            <p className="text-xs sm:text-sm text-[#FCF8F2]/75 font-light leading-relaxed">
-              In Sanatan Dharma, Gau Mata is revered as the mother of the universe and the sacred abode of all divinity. Our Gaushala is dedicated to nurturing, feeding, and sheltering cows with deep reverence and care.
+            <p className="text-sm sm:text-base text-[#FCF8F2]/70 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)" }}>
+              In our tradition, Gau Mata is not just an animal — she is a living deity, the embodiment of selfless giving. Our Gaushala exists to honour that truth every single day, quietly, without fanfare.
             </p>
           </div>
 
-          {/* Narrative & Story Card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center mb-10 sm:mb-12 border border-amber-500/20 bg-[#211813] rounded-3xl p-5 sm:p-10">
-            <div className="space-y-4 text-xs sm:text-sm text-[#FCF8F2]/80 font-light leading-relaxed">
-              <h3 className="cinzel-heading text-base sm:text-xl font-bold text-amber-200">
-                The Sacred Abode of Compassion
+          {/* Story card */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-center mb-10 sm:mb-12 border border-amber-700/20 bg-[#211813] rounded-3xl p-5 sm:p-10">
+            <div className="space-y-4">
+              <h3 className="playfair-heading text-lg sm:text-xl font-bold text-amber-200">
+                A Place of Compassion
               </h3>
-              <p>
-                Serving Gau Mata brings peace, prosperity, and spiritual purity. The first offering of grain and roti in our culture has always belonged to the sacred cow, representing selfless gratitude to nature and the Divine.
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/70 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.05rem" }}>
+                Before the city wakes up, our caretakers are already at work. Fresh green grass cut from the fields. Sweet jaggery measured out for each cow. Water troughs cleaned and refilled. It is a routine built on love, not obligation.
               </p>
-              <p>
-                Our Gaushala ensures that every cow receives fresh green fodder, nutrient-rich jaggery, clean drinking water, spacious shelter, and timely medical attention by caring caregivers.
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/70 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.05rem" }}>
+                Injured cows, abandoned street cows, ageing Gau Mata with nowhere to go — they all find shelter here. A veterinarian visits regularly. Every cow has a name.
               </p>
               <div className="sanskrit-text text-sm sm:text-base text-amber-300 italic pt-1">
-                “सर्वतीर्थमयी गौः सर्वदेवमयी गौः”
+                "सर्वतीर्थमयी गौः सर्वदेवमयी गौः"
+              </div>
+              <div className="text-xs text-amber-200/50 italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+                "The cow contains within her all holy places; she contains all the gods."
               </div>
             </div>
 
-            <div className="border border-amber-500/30 bg-[#1A120E] rounded-2xl p-6 text-center space-y-4">
-              <div className="text-4xl mx-auto mb-1" aria-hidden="true">
-                🐄
-              </div>
-              <h4 className="cinzel-heading text-base font-bold text-white">Daily Gaushala Seva Pledge</h4>
-              <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Every dawn, our caretakers prepare fresh green grass, jaggery (gud), nutritious grain flour, and mineral mixtures to nurture holy cows in our Gaushala with pure maternal affection.
+            <div className="border border-amber-600/25 bg-[#1A120E] rounded-2xl p-6 text-center space-y-4">
+              <div className="text-4xl" aria-hidden="true">🐄</div>
+              <h4 className="playfair-heading text-base font-bold text-white">Daily Gaushala Pledge</h4>
+              <p className="text-xs text-[#FCF8F2]/65 leading-relaxed font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                Every dawn without exception — green grass, jaggery, grain flour, mineral care, clean water, and genuine affection. That is our daily promise to Gau Mata.
               </p>
               <a
                 href="#donate"
                 onClick={() => setSelectedCategory("gaushala")}
                 className="saffron-btn-gradient text-white text-xs font-bold uppercase tracking-wider py-2.5 px-6 rounded-full inline-block hover:scale-105 transition-transform"
+                style={{ fontFamily: "'Lato', sans-serif" }}
               >
                 Sponsor Gaushala Seva
               </a>
             </div>
           </div>
 
-          {/* 4 Pillars of Gaushala Seva */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ ग्रास एवं गुड़</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Daily Green Fodder</div>
-              <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Daily fresh green grass, sweet jaggery (gud), and clean water offered every morning.
-              </p>
-            </div>
-
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">पौष्टिक चोकर आहार</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Nutritious Diet</div>
-              <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Wholesome wheat choker, oilcakes, and mineral nutrients for strength and optimal digestion.
-              </p>
-            </div>
-
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौशाला आश्रय एवं स्वच्छता</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Clean Shelter</div>
-              <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Airy, shaded, hygienic sheds with regular cleaning, natural airflow, and soft dry bedding.
-              </p>
-            </div>
-
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-500/40 transition-colors">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ चिकित्सा सेवा</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Medical &amp; Care</div>
-              <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Dedicated veterinary check-ups, wound treatments, and compassionate elderly cow care.
-              </p>
-            </div>
+          {/* 4 pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { skt: "गौ ग्रास एवं गुड़", label: "Daily Green Fodder", body: "Fresh cut green grass, sweet jaggery, and clean water — offered every single morning." },
+              { skt: "पौष्टिक चोकर आहार", label: "Nutritious Diet", body: "Wheat choker, oilcakes, and mineral supplements to maintain strength and healthy digestion." },
+              { skt: "गौशाला आश्रय", label: "Clean Shelter", body: "Airy, shaded sheds cleaned daily, with fresh dry bedding for rest and comfort." },
+              { skt: "गौ चिकित्सा सेवा", label: "Medical Care", body: "Regular veterinary visits, wound care, and special attention for older or ailing cows." },
+            ].map(({ skt, label, body }) => (
+              <div key={label} className="border border-amber-700/20 bg-[#1F1712] rounded-xl p-5 hover:border-amber-600/40 transition-colors">
+                <div className="sanskrit-text text-sm font-bold text-amber-300 mb-0.5">{skt}</div>
+                <div className="text-[10px] uppercase font-bold text-amber-500/70 tracking-wider mb-2" style={{ fontFamily: "'Lato', sans-serif" }}>{label}</div>
+                <p className="text-xs text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>{body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          6. THE SACRED HANUMAN MANDIR
-          ------------------------------------------------------------------ */}
-      <section id="hanumanji" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
+      {/* ── HANUMAN MANDIR ───────────────────────────────────────────────── */}
+      <section id="hanumanji" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center">
-            {/* Hanuman Ji Idol Photo */}
-            <div className="relative border border-amber-500/30 bg-[#231A14] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
-              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-400/50 mb-5 shadow-xl">
+            {/* Photo card */}
+            <div className="border border-amber-600/30 bg-[#231A14] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
+              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-500/40 mb-5 shadow-xl">
                 <Image
                   src="/black-hanuman-closeup.webp"
-                  alt="Hanuman Mandir Idol"
+                  alt="Hanuman Mandir — Sacred Murti"
                   width={240}
                   height={240}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                <span className="absolute bottom-2 left-2 right-2 text-center text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/60 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/30">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                <span className="absolute bottom-2 left-2 right-2 text-center text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/60 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/25">
                   Divine Darshan
                 </span>
               </div>
-
-              <div className="sanskrit-text text-base sm:text-lg text-amber-200 italic mb-2">
-                “मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्”
+              <div className="sanskrit-text text-sm sm:text-base text-amber-200 italic mb-1 leading-relaxed">
+                "मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्"
               </div>
-              <div className="text-xs text-[#FCF8F2]/70 font-light">
-                Special Tuesday &amp; Saturday Chola &amp; Sindoor Pujas
+              <div className="text-xs text-amber-200/45 italic mt-1" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.9rem" }}>
+                "Swift as the mind, mighty as the wind, master of the senses, greatest among the wise."
               </div>
             </div>
 
             {/* Narrative */}
             <div className="space-y-4">
-              <span className="text-xs uppercase font-bold tracking-widest text-amber-400">
+              <span className="text-xs uppercase font-bold tracking-widest text-amber-500" style={{ fontFamily: "'Lato', sans-serif" }}>
                 Pavitra Dham
               </span>
-              <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white">
+              <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white">
                 The Sacred Hanuman Mandir
               </h2>
-              <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                This sacred sanctuary hosts the consecrated murti of Lord Hanuman. The temple is especially revered for its rare black stone idol, radiating profound spiritual stillness, strength, and divine protection.
+              <p className="text-sm sm:text-base text-[#FCF8F2]/75 leading-loose font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.05rem" }}>
+                Within our Mandir stands a rare and consecrated black stone murti of Lord Hanuman — ancient, still, and radiating a presence that devotees say you feel the moment you enter. The air inside is different. Quiet. Charged.
               </p>
-              <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                Devotees visit to seek courage, inner peace, and blessings for obstacle removal. The foundation upholds daily Vedic aartis, Akhand Jyot, and traditional prasad distributions here.
+              <p className="text-sm sm:text-base text-[#FCF8F2]/75 leading-loose font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1.05rem" }}>
+                Thousands come every week — some for strength before an exam, some for peace after heartbreak, some simply out of habit and love. The foundation holds daily Vedic aarti, an uninterrupted Akhand Jyot, and distributes prasad with care.
               </p>
 
-              <div className="pt-2 flex flex-wrap gap-6 text-xs text-amber-300/90 font-medium">
+              <div className="pt-2 flex flex-wrap gap-6 text-xs text-amber-300/85 font-medium" style={{ fontFamily: "'Lato', sans-serif" }}>
                 <div>
-                  <span className="block text-[10px] uppercase text-[#FCF8F2]/50">Morning Darshan</span>
+                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Morning Darshan</span>
                   6:00 AM – 12:30 PM
                 </div>
                 <div>
-                  <span className="block text-[10px] uppercase text-[#FCF8F2]/50">Evening Aarti</span>
+                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Evening Aarti</span>
                   5:30 PM – 9:00 PM
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Special Pujas</span>
+                  Every Tuesday &amp; Saturday
                 </div>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1">
                 <a
                   href="#donate"
-                  className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white underline"
+                  className="inline-flex items-center gap-1.5 text-xs uppercase font-bold tracking-wider text-amber-400 hover:text-white underline underline-offset-2"
+                  style={{ fontFamily: "'Lato', sans-serif" }}
                 >
-                  <span>Sponsor Sindoor &amp; Chola Seva</span>
-                  <ChevronRight size={14} />
+                  Sponsor Sindoor &amp; Chola Seva <ChevronRight size={13} />
                 </a>
               </div>
             </div>
@@ -608,89 +611,68 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          7. MANDIRS GALLERY (2 MANDIRS: GOA AND MUMBAI)
-          ------------------------------------------------------------------ */}
-      <section id="mandirs" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
+      {/* ── OUR MANDIRS ──────────────────────────────────────────────────── */}
+      <section id="mandirs" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-10 sm:mb-12">
-            <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
+            <div className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
               ॥ पवित्र धाम ॥
-            </span>
-            <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-2">
-              Our 2 Mandirs
-            </h2>
-            <p className="text-xs sm:text-sm text-[#FCF8F2]/70 font-light">
-              Spiritual sanctuaries in Goa and Mumbai.
+            </div>
+            <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+              "Sacred Abodes" — places where the veil between the human and the Divine grows thin.
+            </div>
+            <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white mb-2">Our 2 Mandirs</h2>
+            <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              Two homes of prayer — one in the heartbeat of Mumbai, one in the quiet of Goa.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
-            {/* 1. Mumbai Mandir */}
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-2xl overflow-hidden flex flex-col justify-between">
-              <div>
-                <div className="relative w-full h-48 overflow-hidden">
-                  <Image
-                    src="/shiva-darshan.webp"
-                    alt="Chembur Mandir Mumbai"
-                    width={400}
-                    height={200}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
-                    Mumbai Mandir
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-white mb-1.5">Chembur Mandir, Mumbai</h3>
-                  <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    The primary center for our Sunday Langad serving thousands of free meals to the needy, accompanied by regular morning Hanuman Chalisa recitations.
-                  </p>
-                  <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400 shrink-0" /> Chembur East, Mumbai</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400 shrink-0" /> Sunday Langad: 11:30 AM onwards</div>
-                  </div>
-                </div>
+            {/* Mumbai */}
+            <div className="border border-amber-700/20 bg-[#1F1712] rounded-2xl overflow-hidden flex flex-col">
+              <div className="relative w-full h-48 overflow-hidden">
+                <Image src="/shiva-darshan.webp" alt="Chembur Mandir Mumbai" width={400} height={200}
+                  className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent pointer-events-none" />
+                <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  Mumbai Mandir
+                </span>
               </div>
-              <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-500/30 rounded-xl hover:border-amber-400 transition-colors">
+              <div className="p-5 flex flex-col flex-1">
+                <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-1.5">Chembur Mandir, Mumbai</h3>
+                <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed mb-4 flex-1" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                  Home of the Sunday Langad and the heart of our community in Mumbai. Daily morning chants, Hanuman Chalisa recitations, and 3,500+ people fed here every week.
+                </p>
+                <div className="text-[11px] text-[#FCF8F2]/55 space-y-1 mb-4" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  <div className="flex items-center gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0" /> Chembur East, Mumbai</div>
+                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Sunday Langad: 11:30 AM onwards</div>
+                </div>
+                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-600/30 rounded-xl hover:border-amber-400 transition-colors" style={{ fontFamily: "'Lato', sans-serif" }}>
                   Sponsor Sunday Feast
                 </a>
               </div>
             </div>
 
-            {/* 2. Goa Mandir */}
-            <div className="border border-amber-500/30 bg-[#221914] rounded-2xl overflow-hidden flex flex-col justify-between">
-              <div>
-                <div className="relative w-full h-48 overflow-hidden">
-                  <Image
-                    src="/black-hanuman-ji.webp"
-                    alt="Goa Mandir"
-                    width={400}
-                    height={200}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#221914] via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
-                    Goa Mandir
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-white mb-1.5">Goa Mandir Sanctuary</h3>
-                  <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    A serene tropical temple sanctuary offering daily prayers, holy chants, and peaceful darshan for visiting pilgrims and sadhus.
-                  </p>
-                  <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400 shrink-0" /> Goa Temple Campus, Goa</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400 shrink-0" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
-                  </div>
-                </div>
+            {/* Goa */}
+            <div className="border border-amber-600/25 bg-[#221914] rounded-2xl overflow-hidden flex flex-col">
+              <div className="relative w-full h-48 overflow-hidden">
+                <Image src="/black-hanuman-ji.webp" alt="Goa Mandir" width={400} height={200}
+                  className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#221914] via-transparent to-transparent pointer-events-none" />
+                <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  Goa Mandir
+                </span>
               </div>
-              <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 rounded-xl transition-all">
+              <div className="p-5 flex flex-col flex-1">
+                <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-1.5">Goa Mandir Sanctuary</h3>
+                <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed mb-4 flex-1" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                  A quiet, serene sanctuary offering daily prayers, holy chants, and darshan for pilgrims and sadhus. A place to slow down and remember what matters.
+                </p>
+                <div className="text-[11px] text-[#FCF8F2]/55 space-y-1 mb-4" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  <div className="flex items-center gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0" /> Goa Temple Campus, Goa</div>
+                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
+                </div>
+                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 rounded-xl transition-all" style={{ fontFamily: "'Lato', sans-serif" }}>
                   Goa Mandir Seva
                 </a>
               </div>
@@ -699,141 +681,105 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          8. DONATION SUITE
-          ------------------------------------------------------------------ */}
-      <section id="donate" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-500/20 bg-[#1B1410]">
+      {/* ── DONATION SUITE ───────────────────────────────────────────────── */}
+      <section id="donate" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/20 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
-            <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
+            <div className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
               ॥ पवित्र सहयोग ॥
-            </span>
-            <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-2">
+            </div>
+            <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+              "Sacred partnership" — your contribution becomes part of something much larger than any one of us.
+            </div>
+            <h2 className="playfair-heading text-2xl sm:text-4xl font-bold text-white mb-2">
               Make Your Sacred Donation
             </h2>
-            <p className="text-xs sm:text-sm text-[#FCF8F2]/70 font-light">
-              Scan with Google Pay, PhonePe, Paytm, BHIM or transfer via SBI Bank.
+            <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+              Scan with Google Pay, PhonePe, Paytm or BHIM — or bank transfer via SBI.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            {/* Left 7 Cols: Seva Selection */}
-            <div className="lg:col-span-7 border border-amber-500/25 bg-[#211813] rounded-3xl p-5 sm:p-8">
-              {/* Category Segmented Control */}
+            {/* Left — Seva selection */}
+            <div className="lg:col-span-7 border border-amber-600/25 bg-[#211813] rounded-3xl p-5 sm:p-8">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                <span className="text-xs uppercase font-bold tracking-wider text-white">Select Seva</span>
-                <div className="flex items-center gap-1 bg-[#17110D] p-1 rounded-xl border border-amber-500/20">
-                  <button
-                    onClick={() => setSelectedCategory("all")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-                      selectedCategory === "all" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    All
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("langad")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-                      selectedCategory === "langad" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    Langad
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("gaushala")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
-                      selectedCategory === "gaushala" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
-                    }`}
-                  >
-                    Gaushala
-                  </button>
+                <span className="text-xs uppercase font-bold tracking-wider text-white" style={{ fontFamily: "'Lato', sans-serif" }}>Select Seva</span>
+                <div className="flex items-center gap-1 bg-[#17110D] p-1 rounded-xl border border-amber-700/20">
+                  {(["all", "langad", "gaushala"] as const).map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                        selectedCategory === cat ? "bg-amber-500 text-white" : "text-white/55 hover:text-white"
+                      }`}
+                      style={{ fontFamily: "'Lato', sans-serif" }}
+                    >
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-              {/* Tiers Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 max-h-[380px] overflow-y-auto pr-1">
                 {filteredTiers.map((tier) => {
                   const isSelected = !isCustom && selectedAmount === tier.amount;
                   return (
                     <button
                       key={tier.id}
-                      onClick={() => {
-                        setSelectedAmount(tier.amount);
-                        setIsCustom(false);
-                      }}
+                      onClick={() => { setSelectedAmount(tier.amount); setIsCustom(false); }}
                       className={`text-left p-3.5 rounded-2xl border transition-all cursor-pointer ${
                         isSelected
                           ? "bg-amber-500/20 border-amber-400 text-white"
-                          : "bg-[#1A120E] border-amber-500/20 hover:border-amber-400/40 text-white/80"
+                          : "bg-[#1A120E] border-amber-700/20 hover:border-amber-500/40 text-white/75"
                       }`}
                     >
                       <div className="flex items-baseline justify-between mb-1">
-                        <span className="font-bold text-white text-base">
-                          ₹{tier.amount.toLocaleString("en-IN")}
-                        </span>
-                        <span className="text-[10px] text-amber-300 uppercase tracking-wider font-semibold">
-                          {tier.name}
-                        </span>
+                        <span className="playfair-heading font-bold text-white text-base">₹{tier.amount.toLocaleString("en-IN")}</span>
+                        <span className="text-[10px] text-amber-300 uppercase tracking-wider font-semibold" style={{ fontFamily: "'Lato', sans-serif" }}>{tier.name}</span>
                       </div>
-                      <p className="text-[11px] text-[#FCF8F2]/70 leading-snug">
-                        {tier.impact}
-                      </p>
+                      <p className="text-[11px] text-[#FCF8F2]/65 leading-snug" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.9rem" }}>{tier.impact}</p>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Custom Amount Input */}
+              {/* Custom amount */}
               <div className="mb-6">
-                <label className="text-[11px] uppercase font-semibold tracking-wider text-amber-300 block mb-1.5">
-                  Or Custom Amount (₹)
+                <label className="text-[11px] uppercase font-semibold tracking-wider text-amber-300 block mb-1.5" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  Or enter a custom amount (₹)
                 </label>
                 <div className="relative">
                   <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-amber-400">₹</span>
                   <input
-                    type="number"
-                    min="1"
-                    placeholder="Enter amount..."
+                    type="number" min="1" placeholder="Enter amount..."
                     value={customAmount}
-                    onChange={(e) => {
-                      setCustomAmount(e.target.value);
-                      setIsCustom(true);
-                    }}
+                    onChange={(e) => { setCustomAmount(e.target.value); setIsCustom(true); }}
                     onFocus={() => setIsCustom(true)}
-                    className="w-full bg-[#18110D] border border-amber-500/30 focus:border-amber-300 rounded-xl py-2.5 pl-8 pr-3 text-white text-sm focus:outline-none"
+                    className="w-full bg-[#18110D] border border-amber-700/30 focus:border-amber-300 rounded-xl py-2.5 pl-8 pr-3 text-white text-sm focus:outline-none"
                   />
                 </div>
               </div>
 
-              {/* Donor Details Accordion/Form */}
-              <div className="pt-4 border-t border-amber-500/20">
+              {/* Donor details */}
+              <div className="pt-4 border-t border-amber-700/20">
                 {donationSubmitted ? (
-                  <div className="bg-emerald-950/40 border border-emerald-400/50 rounded-xl p-3 text-emerald-200 text-xs flex items-center gap-2">
+                  <div className="bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-3 text-emerald-200 text-xs flex items-center gap-2">
                     <Check size={16} className="text-emerald-400 shrink-0" />
-                    <span>Receipt details saved for <strong>{donorForm.name}</strong>. Thank you!</span>
+                    <span>Details saved for <strong>{donorForm.name}</strong>. Thank you for your seva!</span>
                   </div>
                 ) : (
                   <form onSubmit={handleDonorSubmit} className="space-y-2.5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      <input
-                        type="text"
-                        placeholder="Your Full Name"
-                        value={donorForm.name}
+                      <input type="text" placeholder="Your Full Name" value={donorForm.name}
                         onChange={(e) => setDonorForm({ ...donorForm, name: e.target.value })}
-                        className="bg-[#18110D] border border-amber-500/25 rounded-xl px-3 py-2 text-xs text-white placeholder-white/40 focus:border-amber-300 focus:outline-none"
-                      />
-                      <input
-                        type="tel"
-                        placeholder="WhatsApp (for Receipt)"
-                        value={donorForm.phone}
+                        className="bg-[#18110D] border border-amber-700/25 rounded-xl px-3 py-2 text-xs text-white placeholder-white/35 focus:border-amber-300 focus:outline-none" />
+                      <input type="tel" placeholder="WhatsApp (for Receipt)" value={donorForm.phone}
                         onChange={(e) => setDonorForm({ ...donorForm, phone: e.target.value })}
-                        className="bg-[#18110D] border border-amber-500/25 rounded-xl px-3 py-2 text-xs text-white placeholder-white/40 focus:border-amber-300 focus:outline-none"
-                      />
+                        className="bg-[#18110D] border border-amber-700/25 rounded-xl px-3 py-2 text-xs text-white placeholder-white/35 focus:border-amber-300 focus:outline-none" />
                     </div>
-                    <button
-                      type="submit"
-                      className="w-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-[11px] uppercase font-bold tracking-wider py-2 rounded-xl transition-all cursor-pointer"
-                    >
+                    <button type="submit"
+                      className="w-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/35 text-amber-200 text-[11px] uppercase font-bold tracking-wider py-2 rounded-xl transition-all cursor-pointer"
+                      style={{ fontFamily: "'Lato', sans-serif" }}>
                       Save Receipt Info
                     </button>
                   </form>
@@ -841,110 +787,76 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right 5 Cols: Payment QR & Details */}
-            <div className="lg:col-span-5 border border-amber-500/25 bg-[#211813] rounded-3xl p-5 sm:p-8 text-center flex flex-col items-center">
-              {/* Payment Method Switcher */}
-              <div className="flex w-full bg-[#17110D] p-1 rounded-xl border border-amber-500/20 mb-5">
-                <button
-                  onClick={() => setActiveTab("upi")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                    activeTab === "upi" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
-                  }`}
-                >
-                  UPI QR Code
-                </button>
-                <button
-                  onClick={() => setActiveTab("bank")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                    activeTab === "bank" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
-                  }`}
-                >
-                  Bank Wire
-                </button>
+            {/* Right — QR & Bank */}
+            <div className="lg:col-span-5 border border-amber-600/25 bg-[#211813] rounded-3xl p-5 sm:p-8 text-center flex flex-col items-center">
+              <div className="flex w-full bg-[#17110D] p-1 rounded-xl border border-amber-700/20 mb-5">
+                {(["upi", "bank"] as const).map((tab) => (
+                  <button key={tab} onClick={() => setActiveTab(tab)}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${activeTab === tab ? "bg-amber-500 text-white" : "text-white/55 hover:text-white"}`}
+                    style={{ fontFamily: "'Lato', sans-serif" }}>
+                    {tab === "upi" ? "UPI QR Code" : "Bank Wire"}
+                  </button>
+                ))}
               </div>
 
               {activeTab === "upi" ? (
                 <div className="w-full flex flex-col items-center">
-                  <div className="text-xs text-amber-300 font-semibold uppercase tracking-wider mb-1">
-                    Selected Contribution
-                  </div>
-                  <div className="cinzel-heading text-2xl font-bold text-white mb-4">
+                  <div className="text-xs text-amber-300 font-semibold uppercase tracking-wider mb-1" style={{ fontFamily: "'Lato', sans-serif" }}>Selected Contribution</div>
+                  <div className="playfair-heading text-2xl font-bold text-white mb-4">
                     ₹{effectiveAmount ? effectiveAmount.toLocaleString("en-IN") : "Any Amount"}
                   </div>
-
-                  <div className="bg-[#FFFDF9] p-3 rounded-2xl border-2 border-amber-400/40 mb-4">
-                    <img
-                      src={qrCodeUrl}
-                      alt="Donation UPI QR Code"
-                      width={224}
-                      height={224}
-                      className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg"
-                    />
+                  <div className="bg-[#FFFDF9] p-3 rounded-2xl border-2 border-amber-400/35 mb-4">
+                    <img src={qrCodeUrl} alt="Donation UPI QR Code" width={224} height={224}
+                      className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg" />
                   </div>
-
-                  <p className="text-[11px] text-[#FCF8F2]/70 mb-4 max-w-xs leading-relaxed">
-                    Scan with <strong>Google Pay, PhonePe, Paytm, BHIM</strong> or any UPI bank app.
+                  <p className="text-[11px] text-[#FCF8F2]/60 mb-4 max-w-xs leading-relaxed" style={{ fontFamily: "'Lato', sans-serif" }}>
+                    Scan with <strong>Google Pay, PhonePe, Paytm, BHIM</strong> or any UPI app.
                   </p>
-
-                  <div className="w-full bg-[#18110D] border border-amber-500/25 rounded-xl p-2.5 flex items-center justify-between gap-2 mb-3">
+                  <div className="w-full bg-[#18110D] border border-amber-700/25 rounded-xl p-2.5 flex items-center justify-between gap-2 mb-3">
                     <div className="text-left truncate">
-                      <span className="text-[9px] uppercase font-bold text-amber-300 block">Trust UPI ID</span>
+                      <span className="text-[9px] uppercase font-bold text-amber-400 block" style={{ fontFamily: "'Lato', sans-serif" }}>Trust UPI ID</span>
                       <span className="text-xs font-mono text-white truncate block">{UPI_ID}</span>
                     </div>
-                    <button
-                      onClick={handleCopyUPI}
+                    <button onClick={handleCopyUPI}
                       className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
-                    >
+                      style={{ fontFamily: "'Lato', sans-serif" }}>
                       {copiedUPI ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
                       <span>{copiedUPI ? "Copied" : "Copy"}</span>
                     </button>
                   </div>
-
-                  {/* Direct Mobile Pay CTA */}
-                  <a
-                    href={upiDeepLink}
+                  <a href={upiDeepLink}
                     className="w-full saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider py-3 rounded-full flex items-center justify-center gap-2 sm:hidden cursor-pointer"
-                  >
+                    style={{ fontFamily: "'Lato', sans-serif" }}>
                     <QrCode size={14} /> Pay ₹{effectiveAmount || ""} via UPI App
                   </a>
                 </div>
               ) : (
-                /* Bank Wire View */
                 <div className="w-full text-left space-y-2 text-xs">
-                  <div className="bg-[#18110D] border border-amber-500/25 rounded-xl p-3">
-                    <span className="text-[10px] uppercase font-bold text-amber-400 block">Beneficiary</span>
-                    <span className="font-semibold text-white">Shyam Mangaram Foundation</span>
-                  </div>
-                  <div className="bg-[#18110D] border border-amber-500/25 rounded-xl p-3">
-                    <span className="text-[10px] uppercase font-bold text-amber-400 block">Bank &amp; Branch</span>
-                    <span className="font-semibold text-white">State Bank of India (SBI), Chembur, Mumbai</span>
-                  </div>
-                  <div className="bg-[#18110D] border border-amber-500/25 rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-amber-400 block">Account Number</span>
-                      <span className="font-mono font-semibold text-white">418902847192</span>
+                  {[
+                    { label: "Beneficiary", val: "Shyam Mangaram Foundation", key: "" },
+                    { label: "Bank & Branch", val: "State Bank of India (SBI), Chembur, Mumbai", key: "" },
+                    { label: "Account Number", val: "418902847192", key: "acc" },
+                    { label: "IFSC Code", val: "SBIN0000523", key: "ifsc" },
+                  ].map(({ label, val, key }) => (
+                    <div key={label} className="bg-[#18110D] border border-amber-700/25 rounded-xl p-3 flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] uppercase font-bold text-amber-500 block" style={{ fontFamily: "'Lato', sans-serif" }}>{label}</span>
+                        <span className={`font-semibold text-white ${key ? "font-mono" : ""}`}>{val}</span>
+                      </div>
+                      {key && (
+                        <button onClick={() => handleCopyBankDetail(val, key)} className="text-amber-400 p-1 cursor-pointer">
+                          {copiedBank === key ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                        </button>
+                      )}
                     </div>
-                    <button onClick={() => handleCopyBankDetail("418902847192", "acc")} className="text-amber-300 p-1 cursor-pointer">
-                      {copiedBank === "acc" ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
-                    </button>
-                  </div>
-                  <div className="bg-[#18110D] border border-amber-500/25 rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-amber-400 block">IFSC Code</span>
-                      <span className="font-mono font-semibold text-white">SBIN0000523</span>
-                    </div>
-                    <button onClick={() => handleCopyBankDetail("SBIN0000523", "ifsc")} className="text-amber-300 p-1 cursor-pointer">
-                      {copiedBank === "ifsc" ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
-                    </button>
-                  </div>
+                  ))}
                 </div>
               )}
 
-              {/* 100% Trust Guarantee */}
-              <div className="border border-amber-500/20 bg-[#18110D] rounded-xl p-3 flex items-center gap-2.5 mt-5 w-full text-left">
-                <ShieldCheck size={20} className="text-amber-400 shrink-0" />
-                <p className="text-[10px] text-[#FCF8F2]/70 leading-snug">
-                  100% of contributions are strictly utilized for free Anna Daan to the needy, Gaushala nourishment, and mandir maintenance.
+              <div className="border border-amber-700/20 bg-[#18110D] rounded-xl p-3 flex items-start gap-2.5 mt-5 w-full text-left">
+                <ShieldCheck size={18} className="text-amber-400 shrink-0 mt-0.5" />
+                <p className="text-[10px] text-[#FCF8F2]/60 leading-snug" style={{ fontFamily: "'Lato', sans-serif" }}>
+                  100% of contributions go directly to free Anna Daan, Gaushala nourishment, and mandir upkeep. No admin fees deducted.
                 </p>
               </div>
             </div>
@@ -952,33 +864,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          9. VOLUNTEER & CONTACT
-          ------------------------------------------------------------------ */}
-      <section id="contact" className="py-14 sm:py-16 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D] text-center">
+      {/* ── VOLUNTEER & CONTACT ──────────────────────────────────────────── */}
+      <section id="contact" className="py-14 sm:py-16 px-4 sm:px-8 border-t border-amber-700/15 bg-[#17110D] text-center">
         <div className="max-w-3xl mx-auto">
-          <span className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
+          <div className="sanskrit-text text-sm sm:text-base text-amber-300 block mb-1">
             ॥ सेवा में जुड़ें ॥
-          </span>
-          <h2 className="cinzel-heading text-2xl sm:text-3xl font-bold text-white mb-3">
-            Join the Sunday Seva Team
+          </div>
+          <div className="text-xs text-amber-200/50 italic mb-4" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.95rem" }}>
+            "Join us in seva" — come not as a volunteer, but as a family member.
+          </div>
+          <h2 className="playfair-heading text-2xl sm:text-3xl font-bold text-white mb-3">
+            Join the Sunday Seva Family
           </h2>
-          <p className="text-xs sm:text-sm text-[#FCF8F2]/75 font-light leading-relaxed max-w-xl mx-auto mb-8">
-            Volunteers assist with vegetable chopping, cooking, serving free meals to the needy, and Gaushala care every Sunday morning.
+          <p className="text-sm sm:text-base text-[#FCF8F2]/70 font-light leading-loose max-w-xl mx-auto mb-8" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)" }}>
+            Every Sunday from 6 AM onwards, volunteers gather to chop vegetables, stir the degs, serve plates, and clean up. It is chaotic, it is noisy, it smells of ghee and cardamom, and it is one of the most beautiful things you will ever do.
           </p>
-
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <a
               href="https://wa.me/919820000000?text=Jai%20Shree%20Ram!%20I%20want%20to%20volunteer%20for%20the%20Sunday%20Langad%20and%20Gaushala%20Seva."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
+              target="_blank" rel="noopener noreferrer"
+              className="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow cursor-pointer"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
-              <Phone size={14} /> Connect on WhatsApp
+              Connect on WhatsApp
             </a>
             <a
               href="#donate"
-              className="w-full sm:w-auto saffron-btn-gradient text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              className="w-full sm:w-auto saffron-btn-gradient text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 shadow cursor-pointer"
+              style={{ fontFamily: "'Lato', sans-serif" }}
             >
               <Heart size={14} className="fill-white" /> Support With Donation
             </a>
@@ -986,85 +899,63 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------------
-          10. FOOTER WITH MAIN LOGO & SANSKRIT BLESSING
-          ------------------------------------------------------------------ */}
-      <footer className="border-t border-amber-500/20 bg-[#120D0A] py-10 px-4 sm:px-8 text-xs text-[#FCF8F2]/60">
+      {/* ── FOOTER ───────────────────────────────────────────────────────── */}
+      <footer className="border-t border-amber-700/20 bg-[#100C08] py-10 px-4 sm:px-8 text-xs text-[#FCF8F2]/50">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-3.5">
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-amber-400/50 bg-[#C04403] p-0.5 shrink-0 shadow">
-              <Image
-                src="/logo-thumb.webp"
-                alt="Shyam Mangaram Foundation Logo"
-                width={48}
-                height={48}
-                className="w-full h-full object-cover rounded-full"
-                loading="lazy"
-              />
+            <div className="w-12 h-12 rounded-full overflow-hidden border border-amber-600/40 bg-[#B83E03] p-0.5 shrink-0">
+              <Image src="/logo-thumb.webp" alt="Shyam Mangaram Foundation" width={48} height={48}
+                className="w-full h-full object-cover rounded-full" loading="lazy" />
             </div>
             <div>
-              <div className="cinzel-heading font-bold text-white text-sm">
-                Shyam Mangaram Foundation
-              </div>
-              <div className="sanskrit-text text-amber-300 text-xs">
-                सेवा ही हमारा धर्म है
-              </div>
+              <div className="playfair-heading font-bold text-white text-sm">Shyam Mangaram Foundation</div>
+              <div className="sanskrit-text text-amber-300/80 text-xs">सेवा ही हमारा धर्म है</div>
             </div>
           </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-amber-200/80">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-amber-300/70" style={{ fontFamily: "'Lato', sans-serif" }}>
             <a href="#langad" className="hover:text-white transition-colors">Sunday Langad</a>
-            <a href="#gaushala" className="hover:text-white transition-colors text-amber-300 font-semibold">Gaushala Seva</a>
+            <a href="#gaushala" className="hover:text-white transition-colors font-semibold text-amber-300">Gaushala Seva</a>
             <a href="#hanumanji" className="hover:text-white transition-colors">Hanuman Mandir</a>
-            <a href="#mandirs" className="hover:text-white transition-colors">Temples</a>
-            <a href="#donate" className="hover:text-white transition-colors text-amber-300 font-semibold">Donate</a>
+            <a href="#mandirs" className="hover:text-white transition-colors">Mandirs</a>
+            <a href="#donate" className="hover:text-white transition-colors font-semibold text-amber-300">Donate</a>
           </div>
         </div>
-
-        <div className="max-w-5xl mx-auto mt-6 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FCF8F2]/40 gap-2 text-center">
-          <p>© {new Date().getFullYear()} Shyam Mangaram Foundation. All rights reserved.</p>
-          <p className="sanskrit-text text-amber-300/80 text-xs sm:text-sm font-semibold">
+        <div className="max-w-5xl mx-auto mt-6 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#FCF8F2]/35 gap-2 text-center">
+          <p style={{ fontFamily: "'Lato', sans-serif" }}>© {new Date().getFullYear()} Shyam Mangaram Foundation. All rights reserved.</p>
+          <p className="sanskrit-text text-amber-300/70 text-xs sm:text-sm font-semibold">
             ॥ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः ॥
           </p>
         </div>
+        <div className="max-w-5xl mx-auto mt-2 text-center text-[10px] text-amber-200/30 italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+          "May all beings be happy. May all beings be free from illness."
+        </div>
       </footer>
 
-      {/* ------------------------------------------------------------------
-          11. VIDEO MODAL
-          ------------------------------------------------------------------ */}
+      {/* ── VIDEO MODAL ──────────────────────────────────────────────────── */}
       {isVideoModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="relative w-full max-w-3xl bg-[#1F1712] border border-amber-400/40 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between p-4 border-b border-amber-500/25 bg-black/40">
+          <div className="relative w-full max-w-3xl bg-[#1F1712] border border-amber-500/35 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="flex items-center justify-between p-4 border-b border-amber-700/25 bg-black/35">
               <span className="sanskrit-text text-sm sm:text-base font-bold text-amber-300">
                 ॥ मन्दिर दर्शन एवं लंगर सेवा ॥
               </span>
-              <button
-                onClick={() => setIsVideoModalOpen(false)}
-                className="text-white/70 hover:text-white p-1 rounded-lg transition-colors cursor-pointer"
-              >
+              <button onClick={() => setIsVideoModalOpen(false)}
+                className="text-white/60 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
                 <X size={20} />
               </button>
             </div>
             <div className="aspect-video w-full bg-black">
-              <video
-                controls
-                autoPlay
-                className="w-full h-full object-cover"
-                poster="/black-hanuman-ji.webp"
-              >
+              <video controls autoPlay className="w-full h-full object-cover" poster="/black-hanuman-ji.webp">
                 <source src="/mandir-darshan.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
-            <div className="p-4 bg-black/60 text-center">
-              <a
-                href="#donate"
-                onClick={() => setIsVideoModalOpen(false)}
+            <div className="p-4 bg-black/55 text-center">
+              <a href="#donate" onClick={() => setIsVideoModalOpen(false)}
                 className="saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider px-6 py-2.5 rounded-full inline-flex items-center gap-2 shadow"
-              >
+                style={{ fontFamily: "'Lato', sans-serif" }}>
                 <Heart size={14} className="fill-white" />
-                <span>Sponsor Sunday Langad Seva</span>
+                Sponsor Sunday Langad Seva
               </a>
             </div>
           </div>
