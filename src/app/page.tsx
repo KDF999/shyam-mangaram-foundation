@@ -16,7 +16,6 @@ import {
   Play,
   X,
   ArrowRight,
-  Dog,
   ExternalLink,
 } from "lucide-react";
 
@@ -25,7 +24,7 @@ interface SevaTier {
   name: string;
   amount: number;
   impact: string;
-  category: "langad" | "animals";
+  category: "langad" | "gaushala";
   popular?: boolean;
 }
 
@@ -35,21 +34,21 @@ const SEVA_TIERS: SevaTier[] = [
     id: "feed-10",
     name: "Anna Daan Seva",
     amount: 501,
-    impact: "Feeds 10 devotees a full hot, satvik Sunday meal in Chembur",
+    impact: "Feeds 10 devotees a full hot, satvik Sunday meal completely free of cost in Chembur",
     category: "langad",
   },
   {
     id: "bhog-seva",
     name: "Prasad & Bhog Seva",
     amount: 1100,
-    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti",
+    impact: "Sponsors fresh halwa, prasad & seasonal fruits for morning aarti and free distribution",
     category: "langad",
   },
   {
     id: "feed-50",
     name: "Kanya & Sadhu Bhojan",
     amount: 2500,
-    impact: "Provides nutritious meals & holy prasad for 50 people",
+    impact: "Provides nutritious meals & holy prasad free of cost for 50 needy devotees",
     category: "langad",
     popular: true,
   },
@@ -57,64 +56,57 @@ const SEVA_TIERS: SevaTier[] = [
     id: "deg-sponsor",
     name: "Full Langad Deg",
     amount: 5100,
-    impact: "Sponsors one giant cauldron (Deg) of hot Langad feeding 150+ devotees",
+    impact: "Sponsors one giant cauldron (Deg) of hot Langad served free to 150+ devotees",
     category: "langad",
   },
   {
     id: "co-sponsor",
     name: "Sunday Langad Co-Sponsor",
     amount: 11000,
-    impact: "Co-sponsors the entire Sunday feast feeding over 500+ people",
+    impact: "Co-sponsors the entire Sunday feast feeding over 500+ needy devotees free of cost",
     category: "langad",
   },
-  // Animal Seva Tiers
+  // Gaushala Seva Tiers
   {
-    id: "gau-seva",
-    name: "Gau Mata Grass & Gud",
+    id: "gau-grass",
+    name: "Gau Grass & Gud Seva",
     amount: 251,
-    impact: "Fresh green fodder, jaggery (gud) and clean water for sacred cows",
-    category: "animals",
+    impact: "Fresh green fodder, sweet jaggery (gud) and clean drinking water for Gau Mata",
+    category: "gaushala",
   },
   {
-    id: "dog-10",
-    name: "Feed 10 Street Dogs",
+    id: "gau-nutri",
+    name: "Daily Fodder & Nutritious Choker",
     amount: 501,
-    impact: "Freshly cooked warm khichdi, milk, and rotis for 10 voiceless stray dogs",
-    category: "animals",
+    impact: "Nutritious grain flour, green grass, and mineral care for cows in our Gaushala",
+    category: "gaushala",
     popular: true,
   },
   {
-    id: "pakshi-seva",
-    name: "Pakshi Dana-Paani",
-    amount: 751,
-    impact: "Installs 3 earthen water bowls + 5kg grain bag for birds",
-    category: "animals",
-  },
-  {
-    id: "animal-combo",
-    name: "Gau & Shwan Seva Combo",
+    id: "gau-herd",
+    name: "One Day Herd Nutrition",
     amount: 1100,
-    impact: "Feeds a herd of cows and an entire pack of 25+ street dogs daily",
-    category: "animals",
+    impact: "Provides wholesome daily fodder, nutrition & fresh water for a herd of cows",
+    category: "gaushala",
   },
   {
-    id: "animal-day-patron",
-    name: "Full Day Animal Seva Patron",
-    amount: 2100,
-    impact: "Sponsors all street animal feeding & bird water refills across mandir grounds",
-    category: "animals",
+    id: "gau-day-patron",
+    name: "Full Day Gaushala Patron",
+    amount: 2500,
+    impact: "Sponsors entire Gaushala green fodder, nutrition, shed cleaning and fresh water for a full day",
+    category: "gaushala",
   },
   {
-    id: "animal-medical",
-    name: "Animal Medical & Winter Seva",
+    id: "gau-medical",
+    name: "Gau Seva Medical & Shelter Care",
     amount: 5100,
-    impact: "Emergency veterinary care, wound dressing, vaccination & reflective collars",
-    category: "animals",
+    impact: "Veterinary treatment, medicines, seasonal shelter care and nourishment for sick or aged cows",
+    category: "gaushala",
   },
 ];
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "langad" | "animals">("all");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "langad" | "gaushala">("all");
   const [selectedAmount, setSelectedAmount] = useState<number>(501);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [isCustom, setIsCustom] = useState<boolean>(false);
@@ -179,7 +171,7 @@ export default function Home() {
         </span>
         <span className="hidden sm:inline text-amber-300/40">•</span>
         <span className="text-xs sm:text-sm text-white/90 font-medium truncate">
-          Sunday Langad in Chembur &amp; Daily Pashu-Pakshi Seva
+          Sunday Langad in Chembur (Free of Cost) &amp; Pavitra Gaushala Seva
         </span>
         <a
           href="#donate"
@@ -218,9 +210,8 @@ export default function Home() {
             <a href="#langad" className="hover:text-amber-300 transition-colors">
               Sunday Langad
             </a>
-            <a href="#animals" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 text-amber-300 font-bold">
-              <Dog size={14} className="text-amber-300" />
-              <span>Animal Seva</span>
+            <a href="#gaushala" className="hover:text-amber-300 transition-colors text-amber-300 font-bold">
+              Gaushala Seva
             </a>
             <a href="#hanumanji" className="hover:text-amber-300 transition-colors">
               Black Hanuman Ji
@@ -284,9 +275,9 @@ export default function Home() {
             ॥ सेवा ही हमारा धर्म है ॥
           </div>
 
-          {/* Minimal Clean Purpose Statement */}
+          {/* Purpose Statement */}
           <p className="text-sm sm:text-base md:text-lg text-[#FCF8F2]/85 font-light leading-relaxed max-w-2xl mb-8">
-            Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad</strong> in Chembur, protecting street animals and cows as <strong className="text-amber-400 font-medium">living manifestations of God</strong>, and anchoring devotees in the divine grace of the <strong className="text-amber-300 font-medium">Black Hanuman Ji</strong> in Sindhudurg and our sanctuaries in <strong className="text-amber-300 font-medium">Goa</strong>.
+            Nourishing thousands through unbroken <strong className="text-amber-300 font-medium">Sunday Langad in Chembur served free of cost to the needy</strong>, nurturing holy cows with daily devotion through our <strong className="text-amber-400 font-medium">Pavitra Gaushala Seva</strong>, and anchoring devotees in the divine grace of the <strong className="text-amber-300 font-medium">Black Hanuman Ji</strong> and our sacred mandirs in <strong className="text-amber-300 font-medium">Goa and Mumbai</strong>.
           </p>
 
           {/* Actions */}
@@ -296,7 +287,7 @@ export default function Home() {
               className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg cursor-pointer"
             >
               <Heart size={16} className="fill-white" />
-              <span>Sponsor Food &amp; Animal Seva</span>
+              <span>Sponsor Food &amp; Gaushala Seva</span>
             </a>
 
             <button
@@ -309,19 +300,19 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Minimal Stats Row (PC & Mobile Optimized) */}
+        {/* Stats Row */}
         <div className="relative z-10 w-full max-w-4xl mx-auto mt-14 pt-8 border-t border-amber-500/15 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
             <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-300 mb-0.5">3,500+</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Meals Every Sunday</div>
+            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Free Meals Every Sunday</div>
           </div>
           <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-400 mb-0.5">200+ Daily</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Street Dogs &amp; Cows Fed</div>
+            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-400 mb-0.5">Gaushala</div>
+            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Daily Gau Mata Seva</div>
           </div>
           <div>
-            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-200 mb-0.5">3 Mandirs</div>
-            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Mumbai, Sindhudurg, Goa</div>
+            <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-amber-200 mb-0.5">2 Mandirs</div>
+            <div className="text-[11px] uppercase tracking-wider text-[#FCF8F2]/60 font-medium">Goa and Mumbai</div>
           </div>
           <div>
             <div className="cinzel-heading text-2xl sm:text-3xl font-bold text-orange-400 mb-0.5">100% Satvik</div>
@@ -331,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          4. SUNDAY LANGAD SEVA (MINIMAL & EDITORIAL)
+          4. SUNDAY LANGAD SEVA (FREE OF COST TO THE NEEDY)
           ------------------------------------------------------------------ */}
       <section id="langad" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
@@ -342,8 +333,8 @@ export default function Home() {
             <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
               Sunday Langad in Chembur
             </h2>
-            <p className="text-xs sm:text-sm text-[#FCF8F2]/75 font-light leading-relaxed">
-              Every Sunday morning, the Chembur temple opens its doors to feed over 3,500 people. Clean, hot, satvik meals served with dignity to all.
+            <p className="text-xs sm:text-sm text-[#FCF8F2]/85 font-light leading-relaxed">
+              Every Sunday morning, the Chembur temple opens its doors to feed over 3,500 people. Clean, hot, satvik meals served <strong className="text-amber-300 font-semibold">free of cost to the needy</strong> with dignity and love to all.
             </p>
           </div>
 
@@ -351,17 +342,17 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6">
               <span className="text-amber-400 font-serif text-lg block mb-1">01.</span>
-              <h3 className="text-base font-bold text-white mb-2">Pure Satvik Nutrition</h3>
+              <h3 className="text-base font-bold text-white mb-2">100% Free of Cost</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Prepared with highest cleanliness, pure ghee, and fresh vegetables. Served hot with rice, dal, rotis, and holy halwa prasad.
+                Every Sunday meal is served completely free of cost to the needy, senior citizens, children, and devotees without any distinction.
               </p>
             </div>
 
             <div className="border border-amber-500/20 bg-[#221914] rounded-2xl p-6">
               <span className="text-amber-400 font-serif text-lg block mb-1">02.</span>
-              <h3 className="text-base font-bold text-white mb-2">Dignity for Every Soul</h3>
+              <h3 className="text-base font-bold text-white mb-2">Pure Satvik Nutrition</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Devotees, children, senior citizens, and migrant laborers sit side by side as one human family under the benevolence of God.
+                Cooked with pure ghee, fresh seasonal vegetables, lentils, rice, rotis, and holy halwa prasad prepared under strict cleanliness.
               </p>
             </div>
 
@@ -369,49 +360,49 @@ export default function Home() {
               <span className="text-amber-400 font-serif text-lg block mb-1">03.</span>
               <h3 className="text-base font-bold text-white mb-2">Unbroken 52 Weeks</h3>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Rain, storms, or summer heat — the cauldrons are lit every Sunday without a single missed week over the years.
+                Rain, storms, or summer heat — the langad cauldrons are lit every Sunday without a single missed week over the years.
               </p>
             </div>
           </div>
 
-          {/* Minimal Callout Banner */}
+          {/* Callout Banner */}
           <div className="border border-amber-500/30 bg-[#261D17] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
             <div>
               <div className="cinzel-heading text-lg sm:text-xl font-bold text-white mb-1">
-                Just ₹501 Feeds 10 Devotees This Sunday
+                Just ₹501 Feeds 10 Needy Devotees This Sunday
               </div>
               <p className="text-xs text-[#FCF8F2]/70 font-light max-w-xl">
-                Your contribution directly purchases grains, lentils, fresh produce, and ghee for the Sunday Langad feast.
+                Your contribution directly purchases grains, lentils, fresh produce, and ghee for the Sunday Langad feast served free of cost.
               </p>
             </div>
             <a
               href="#donate"
               className="saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider px-6 py-3 rounded-full shrink-0 shadow-md hover:scale-105 transition-transform"
             >
-              Sponsor Meals
+              Sponsor Free Meals
             </a>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------------
-          5. ANIMAL SEVA (MINIMAL EDITORIAL & ENLARGED SANSKRIT)
+          5. GAUSHALA SEVA (HOLY GAU MATA SEVA)
           ------------------------------------------------------------------ */}
-      <section id="animals" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
+      <section id="gaushala" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
-          {/* Section Header with Enlarged Sanskrit */}
+          {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="sanskrit-text text-xl sm:text-3xl text-amber-300 font-bold block mb-2">
-              ॥ जीव सेवा ही शिव सेवा ॥
+              ॥ गावः विश्वस्य मातरः ॥
             </span>
             <div className="sanskrit-text text-base sm:text-xl text-amber-200/90 italic mb-4">
-              “ईश्वरः सर्वभूतानां हृद्देशेऽर्जुन तिष्ठति”
+              “धेनूनाम् अस्मि कामधुक्” — Among cows, I am Kamadhenu (Lord Krishna, Gita 10.28)
             </div>
             <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-3">
-              Feeding Animals As God
+              Pavitra Gaushala Seva
             </h2>
             <p className="text-xs sm:text-sm text-[#FCF8F2]/75 font-light leading-relaxed">
-              A human being can speak, weep, or ask for bread. But a shivering stray dog, an abandoned cow, or a thirsty bird suffers in complete silence. In Sanatan Dharma, serving them is direct worship of the Supreme Divine.
+              In Sanatan Dharma, Gau Mata is revered as the mother of the universe and the sacred abode of all divinity. Our Gaushala is dedicated to nurturing, feeding, and sheltering cows with deep reverence and care.
             </p>
           </div>
 
@@ -419,68 +410,68 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12 border border-amber-500/20 bg-[#211813] rounded-3xl p-6 sm:p-10">
             <div className="space-y-4 text-xs sm:text-sm text-[#FCF8F2]/80 font-light leading-relaxed">
               <h3 className="cinzel-heading text-lg sm:text-xl font-bold text-amber-200">
-                The Voiceless Deities
+                The Sacred Abode of Compassion
               </h3>
               <p>
-                Lord Shiva is <strong className="text-amber-300 font-medium">Pashupatinath</strong> — protector of all animals. Lord Bhairava rides with the dog. Lord Krishna plays his flute among gentle cows. And Lord Hanuman&apos;s loyal vanaras embody divine devotion.
+                Serving Gau Mata brings peace, prosperity, and spiritual purity. The first offering of grain and roti in our culture has always belonged to the sacred cow, representing selfless gratitude to nature and the Divine.
               </p>
               <p>
-                When Yudhishthira reached Heaven in the Mahabharata, he refused to enter without his street dog companion, declaring that abandoning a creature who trusts you unconditionally is the gravest sin on Earth. The dog was Dharma Himself.
+                Our Gaushala ensures that every cow receives fresh green fodder, nutrient-rich jaggery, clean drinking water, spacious shelter, and timely medical attention by caring caregivers.
               </p>
               <div className="sanskrit-text text-sm sm:text-base text-amber-300 italic pt-1">
-                “सिया राममय सब जग जानी, करहुं प्रनाम जोरि जुग पानी”
+                “सर्वतीर्थमयी गौः सर्वदेवमयी गौः”
               </div>
             </div>
 
             <div className="border border-amber-500/30 bg-[#1A120E] rounded-2xl p-6 text-center space-y-4">
-              <div className="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 mx-auto">
-                <Dog size={24} />
+              <div className="text-4xl mx-auto mb-1">
+                🐄
               </div>
-              <h4 className="cinzel-heading text-base font-bold text-white">Daily Animal Seva Pledge</h4>
+              <h4 className="cinzel-heading text-base font-bold text-white">Daily Gaushala Seva Pledge</h4>
               <p className="text-xs text-[#FCF8F2]/70 leading-relaxed font-light">
-                Every dawn, volunteers prepare warm satvik khichdi, milk, and rotis for 200+ street dogs, care for cows with fresh green grass and jaggery, and replenish clay water pots for birds across Chembur and coastal mandirs.
+                Every dawn, our caretakers prepare fresh green grass, jaggery (gud), nutritious grain flour, and mineral mixtures to nurture holy cows in our Gaushala with pure maternal affection.
               </p>
               <a
                 href="#donate"
-                onClick={() => setSelectedCategory("animals")}
+                onClick={() => setSelectedCategory("gaushala")}
                 className="saffron-btn-gradient text-white text-xs font-bold uppercase tracking-wider py-2.5 px-6 rounded-full inline-block hover:scale-105 transition-transform"
               >
-                Sponsor Animal Seva
+                Sponsor Gaushala Seva
               </a>
             </div>
           </div>
 
-          {/* Minimal 4-Pillar Grid */}
+          {/* 4 Pillars of Gaushala Seva */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ माता सेवा</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Kamadhenu Swaroop</div>
+              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ ग्रास एवं गुड़</div>
+              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Daily Green Fodder</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Daily fresh green fodder, jaggery (gud), clean water, and medical care for aged and injured cows.
+                Daily fresh green grass, sweet jaggery (gud), and clean water offered every morning.
               </p>
             </div>
 
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">श्वान सेवा</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Bhairava Swaroop</div>
+              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">पौष्टिक चोकर आहार</div>
+              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Nutritious Diet</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                200+ street dogs fed daily with warm khichdi, milk &amp; soft rotis; wound dressing &amp; reflective night collars.
+                Wholesome wheat choker, oilcakes, and mineral nutrients for strength and optimal digestion.
               </p>
             </div>
 
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">पक्षी सेवा</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Pakshi Narayana</div>
+              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौशाला आश्रय एवं स्वच्छता</div>
+              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Clean Shelter</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Clay water bowls installed on trees and terraces to protect birds from heat; daily morning millets &amp; grains.
+                Airy, shaded, hygienic sheds with regular cleaning, natural airflow, and soft dry bedding.
               </p>
             </div>
 
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-xl p-5">
-              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">वानर सेवा</div>
-              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Hanuman Sena</div>
+              <div className="sanskrit-text text-base font-bold text-amber-300 mb-1">गौ चिकित्सा सेवा</div>
+              <div className="text-[10px] uppercase font-bold text-amber-400/80 tracking-wider mb-2">Medical &amp; Care</div>
               <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed">
-                Fresh bananas, seasonal fruits, and clean food provided to resident monkey troops and sanctuary creatures.
+                Dedicated veterinary check-ups, wound treatments, and compassionate elderly cow care.
               </p>
             </div>
           </div>
@@ -488,7 +479,7 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          6. BLACK HANUMAN JI IN SINDHUDURG (NO KRISHNA SHILA MENTION)
+          6. THE SACRED BLACK HANUMAN JI
           ------------------------------------------------------------------ */}
       <section id="hanumanji" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
@@ -498,12 +489,12 @@ export default function Home() {
               <div className="relative w-52 h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-400/50 mb-5 shadow-xl">
                 <img
                   src="/black-hanuman-closeup.webp"
-                  alt="Black Hanuman Ji Idol Sindhudurg"
+                  alt="Black Hanuman Ji Idol"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <span className="absolute bottom-2 left-2 right-2 text-center text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/60 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/30">
-                  Sindhudurg Darshan
+                  Divine Darshan
                 </span>
               </div>
 
@@ -515,19 +506,19 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Narrative - Clean & Authentic (Without Krishna Shila Point) */}
+            {/* Narrative */}
             <div className="space-y-4">
               <span className="text-xs uppercase font-bold tracking-widest text-amber-400">
-                Sindhudurg Coastal Sanctuary
+                Miraculous Shrine
               </span>
               <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white">
                 The Sacred Black Hanuman Ji
               </h2>
               <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                Nestled in the historic coastal district of Sindhudurg, this sacred sanctuary hosts the miraculous murti of Lord Hanuman. Radiating immense peace and protection, the shrine is revered across Maharashtra and Goa.
+                This sacred sanctuary hosts the miraculous murti of Lord Hanuman. Radiating immense peace, strength, and protection, the shrine is deeply revered by devotees from all walks of life.
               </p>
               <p className="text-xs sm:text-sm text-[#FCF8F2]/80 leading-relaxed font-light">
-                Devotees visit to seek courage, focus, and blessings for peace and obstacle removal. The foundation maintains daily Vedic aartis, Akhand Jyot, and traditional prasad distributions here.
+                Devotees visit to seek courage, focus, and blessings for peace and obstacle removal. The foundation upholds daily Vedic aartis, Akhand Jyot, and traditional prasad distributions here.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-6 text-xs text-amber-300/90 font-medium">
@@ -556,7 +547,7 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          7. MINIMAL MANDIRS GALLERY
+          7. MANDIRS GALLERY (2 MANDIRS: GOA AND MUMBAI)
           ------------------------------------------------------------------ */}
       <section id="mandirs" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/15 bg-[#17110D]">
         <div className="max-w-5xl mx-auto">
@@ -565,105 +556,73 @@ export default function Home() {
               ॥ पवित्र धाम ॥
             </span>
             <h2 className="cinzel-heading text-2xl sm:text-4xl font-bold text-white mb-2">
-              Our Temples
+              Our 2 Mandirs
             </h2>
             <p className="text-xs sm:text-sm text-[#FCF8F2]/70 font-light">
-              Spiritual sanctuaries in Chembur, Sindhudurg, and Goa.
+              Spiritual sanctuaries in Goa and Mumbai.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Chembur */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {/* 1. Mumbai Mandir */}
             <div className="border border-amber-500/20 bg-[#1F1712] rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative w-full h-44 overflow-hidden">
+                <div className="relative w-full h-48 overflow-hidden">
                   <img
                     src="/shiva-darshan.webp"
-                    alt="Chembur Mandir"
+                    alt="Chembur Mandir Mumbai"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent" />
                   <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
-                    Chembur, Mumbai
+                    Mumbai Mandir
                   </span>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-bold text-white mb-1.5">Chembur Mandir</h3>
+                  <h3 className="text-base font-bold text-white mb-1.5">Chembur Mandir, Mumbai</h3>
                   <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    Home of Sunday Langad and animal seva kitchen. Devotees gather for morning Hanuman Chalisa and food distribution.
+                    The primary center for our Sunday Langad serving thousands of free meals to the needy, accompanied by regular morning Hanuman Chalisa recitations.
                   </p>
                   <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
                     <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Chembur East, Mumbai</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Sunday Langad: 11:30 AM</div>
+                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Sunday Langad: 11:30 AM onwards</div>
                   </div>
                 </div>
               </div>
               <div className="p-5 pt-0">
                 <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-500/30 rounded-xl">
-                  Sponsor Feast
+                  Sponsor Sunday Feast
                 </a>
               </div>
             </div>
 
-            {/* Sindhudurg */}
+            {/* 2. Goa Mandir */}
             <div className="border border-amber-500/30 bg-[#221914] rounded-2xl overflow-hidden flex flex-col justify-between">
               <div>
-                <div className="relative w-full h-44 overflow-hidden">
+                <div className="relative w-full h-48 overflow-hidden">
                   <img
                     src="/black-hanuman-ji.webp"
-                    alt="Sindhudurg Mandir"
+                    alt="Goa Mandir"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#221914] via-transparent to-transparent" />
                   <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
-                    Sindhudurg Coastal Sanctuary
+                    Goa Mandir
                   </span>
                 </div>
                 <div className="p-5">
-                  <h3 className="text-base font-bold text-white mb-1.5">Sindhudurg Mandir</h3>
+                  <h3 className="text-base font-bold text-white mb-1.5">Goa Mandir Sanctuary</h3>
                   <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    Sanctuary of the miraculous Black Hanuman Ji idol. Known across the Konkan belt for courage, stillness, and blessings.
+                    A serene tropical temple sanctuary offering daily prayers, holy chants, and shelter &amp; peaceful darshan for visiting pilgrims and sadhus.
                   </p>
                   <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Sindhudurg Coast, Maharashtra</div>
-                    <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Special Puja: Tue &amp; Sat</div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl">
-                  Sindhudurg Seva
-                </a>
-              </div>
-            </div>
-
-            {/* Goa */}
-            <div className="border border-amber-500/20 bg-[#1F1712] rounded-2xl overflow-hidden flex flex-col justify-between">
-              <div>
-                <div className="relative w-full h-44 overflow-hidden">
-                  <img
-                    src="/shiva-darshan.webp"
-                    alt="Goa Mandir"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1F1712] via-transparent to-transparent" />
-                  <span className="absolute bottom-2 left-3 text-[10px] uppercase font-bold text-amber-300 tracking-wider">
-                    Goa Retreat
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-base font-bold text-white mb-1.5">Goa Mandir</h3>
-                  <p className="text-xs text-[#FCF8F2]/70 font-light leading-relaxed mb-4">
-                    A serene tropical sanctuary offering daily prayers, holy chants, and shelter for visiting sadhus, pilgrims, and animal companions.
-                  </p>
-                  <div className="text-[11px] text-[#FCF8F2]/60 space-y-1">
-                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Goa Temple Campus</div>
+                    <div className="flex items-center gap-1.5"><MapPin size={12} className="text-amber-400" /> Goa Temple Campus, Goa</div>
                     <div className="flex items-center gap-1.5"><Clock size={12} className="text-amber-400" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
                   </div>
                 </div>
               </div>
               <div className="p-5 pt-0">
-                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-500/30 rounded-xl">
+                <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl">
                   Goa Mandir Seva
                 </a>
               </div>
@@ -673,7 +632,7 @@ export default function Home() {
       </section>
 
       {/* ------------------------------------------------------------------
-          8. DONATION SUITE (MINIMAL, RESPONSIVE & MOBILE-OPTIMIZED)
+          8. DONATION SUITE
           ------------------------------------------------------------------ */}
       <section id="donate" className="py-18 sm:py-24 px-4 sm:px-8 border-t border-amber-500/20 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
@@ -698,7 +657,7 @@ export default function Home() {
                 <div className="flex items-center gap-1 bg-[#17110D] p-1 rounded-xl border border-amber-500/20">
                   <button
                     onClick={() => setSelectedCategory("all")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all ${
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                       selectedCategory === "all" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
                     }`}
                   >
@@ -706,19 +665,19 @@ export default function Home() {
                   </button>
                   <button
                     onClick={() => setSelectedCategory("langad")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all ${
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                       selectedCategory === "langad" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
                     }`}
                   >
                     Langad
                   </button>
                   <button
-                    onClick={() => setSelectedCategory("animals")}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all ${
-                      selectedCategory === "animals" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
+                    onClick={() => setSelectedCategory("gaushala")}
+                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                      selectedCategory === "gaushala" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
                     }`}
                   >
-                    Animals
+                    Gaushala
                   </button>
                 </div>
               </div>
@@ -805,7 +764,7 @@ export default function Home() {
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-[11px] uppercase font-bold tracking-wider py-2 rounded-xl transition-all"
+                      className="w-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 text-[11px] uppercase font-bold tracking-wider py-2 rounded-xl transition-all cursor-pointer"
                     >
                       Save Receipt Info
                     </button>
@@ -820,7 +779,7 @@ export default function Home() {
               <div className="flex w-full bg-[#17110D] p-1 rounded-xl border border-amber-500/20 mb-5">
                 <button
                   onClick={() => setActiveTab("upi")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     activeTab === "upi" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
                   }`}
                 >
@@ -828,7 +787,7 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => setActiveTab("bank")}
-                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all ${
+                  className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     activeTab === "bank" ? "bg-amber-500 text-white" : "text-white/60 hover:text-white"
                   }`}
                 >
@@ -864,7 +823,7 @@ export default function Home() {
                     </div>
                     <button
                       onClick={handleCopyUPI}
-                      className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shrink-0"
+                      className="bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 px-3 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
                     >
                       {copiedUPI ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
                       <span>{copiedUPI ? "Copied" : "Copy"}</span>
@@ -874,7 +833,7 @@ export default function Home() {
                   {/* Direct Mobile Pay CTA */}
                   <a
                     href={upiDeepLink}
-                    className="w-full saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider py-3 rounded-full flex items-center justify-center gap-2 sm:hidden"
+                    className="w-full saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider py-3 rounded-full flex items-center justify-center gap-2 sm:hidden cursor-pointer"
                   >
                     <QrCode size={14} /> Pay ₹{effectiveAmount || ""} via UPI App
                   </a>
@@ -895,7 +854,7 @@ export default function Home() {
                       <span className="text-[10px] uppercase font-bold text-amber-400 block">Account Number</span>
                       <span className="font-mono font-semibold text-white">418902847192</span>
                     </div>
-                    <button onClick={() => handleCopyBankDetail("418902847192", "acc")} className="text-amber-300 p-1">
+                    <button onClick={() => handleCopyBankDetail("418902847192", "acc")} className="text-amber-300 p-1 cursor-pointer">
                       {copiedBank === "acc" ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                     </button>
                   </div>
@@ -904,7 +863,7 @@ export default function Home() {
                       <span className="text-[10px] uppercase font-bold text-amber-400 block">IFSC Code</span>
                       <span className="font-mono font-semibold text-white">SBIN0000523</span>
                     </div>
-                    <button onClick={() => handleCopyBankDetail("SBIN0000523", "ifsc")} className="text-amber-300 p-1">
+                    <button onClick={() => handleCopyBankDetail("SBIN0000523", "ifsc")} className="text-amber-300 p-1 cursor-pointer">
                       {copiedBank === "ifsc" ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                     </button>
                   </div>
@@ -915,7 +874,7 @@ export default function Home() {
               <div className="border border-amber-500/20 bg-[#18110D] rounded-xl p-3 flex items-center gap-2.5 mt-5 w-full text-left">
                 <ShieldCheck size={20} className="text-amber-400 shrink-0" />
                 <p className="text-[10px] text-[#FCF8F2]/70 leading-snug">
-                  100% of contributions are strictly utilized for Anna Daan, street animal nourishment, and mandir maintenance.
+                  100% of contributions are strictly utilized for free Anna Daan to the needy, Gaushala nourishment, and mandir maintenance.
                 </p>
               </div>
             </div>
@@ -935,21 +894,21 @@ export default function Home() {
             Join the Sunday Seva Team
           </h2>
           <p className="text-xs sm:text-sm text-[#FCF8F2]/75 font-light leading-relaxed max-w-xl mx-auto mb-8">
-            Volunteers assist with vegetable chopping, cooking, serving devotees, and street animal feeding every Sunday morning.
+            Volunteers assist with vegetable chopping, cooking, serving free meals to the needy, and Gaushala care every Sunday morning.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <a
-              href="https://wa.me/919820000000?text=Jai%20Shree%20Ram!%20I%20want%20to%20volunteer%20for%20the%20Sunday%20Langad%20and%20Animal%20Seva."
+              href="https://wa.me/919820000000?text=Jai%20Shree%20Ram!%20I%20want%20to%20volunteer%20for%20the%20Sunday%20Langad%20and%20Gaushala%20Seva."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-md"
+              className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer"
             >
               <Phone size={14} /> Connect on WhatsApp
             </a>
             <a
               href="#donate"
-              className="w-full sm:w-auto saffron-btn-gradient text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 shadow-md"
+              className="w-full sm:w-auto saffron-btn-gradient text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 shadow-md cursor-pointer"
             >
               <Heart size={14} className="fill-white" /> Support With Donation
             </a>
@@ -982,7 +941,7 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-amber-200/80">
             <a href="#langad" className="hover:text-white transition-colors">Sunday Langad</a>
-            <a href="#animals" className="hover:text-white transition-colors text-amber-300 font-semibold">Animal Seva</a>
+            <a href="#gaushala" className="hover:text-white transition-colors text-amber-300 font-semibold">Gaushala Seva</a>
             <a href="#hanumanji" className="hover:text-white transition-colors">Black Hanuman Ji</a>
             <a href="#mandirs" className="hover:text-white transition-colors">Temples</a>
             <a href="#donate" className="hover:text-white transition-colors text-amber-300 font-semibold">Donate</a>
