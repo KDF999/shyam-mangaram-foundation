@@ -277,12 +277,9 @@ export default function Home() {
             </picture>
           </div>
 
-          {/* Sanskrit mantra */}
-          <div className="mb-1">
-            <div className="sanskrit-text text-2xl sm:text-4xl text-amber-300 font-bold tracking-wide">
-              ॥ सेवा ही हमारा धर्म है ॥
-            </div>
-            <div className="text-xs sm:text-sm text-amber-200/60 mt-1 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+          {/* Sanskrit Creed Meaning / Subtitle */}
+          <div className="mb-2">
+            <div className="text-xs sm:text-sm text-amber-200/70 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
               Service is our highest duty — this is our faith, our practice, and our path.
             </div>
           </div>
