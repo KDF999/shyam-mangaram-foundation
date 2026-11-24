@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-saffron: #f97316;
+    --color-marigold: #f59e0b;
+    --color-gold: #fbbf24;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #19130F;
+    color: #FCF8F2;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  body {
+    background-color: #19130F;
+    color: #FCF8F2;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Devotional Font Styles */
+.sanskrit-text {
+  font-family: 'Noto Serif Devanagari', 'Georgia', serif;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+.cinzel-heading {
+  font-family: 'Cinzel', 'Georgia', serif;
+  letter-spacing: 0.05em;
+}
+
+/* Devotional Gradient Text */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #FFFDF8 0%, #FDE68A 35%, #F59E0B 70%, #D97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.saffron-text-gradient {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 35%, #FB923C 70%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.saffron-btn-gradient {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 50%, #C2410C 100%);
+  box-shadow: 0 4px 20px -2px rgba(234, 88, 12, 0.45);
+}
+
+.saffron-btn-gradient:hover {
+  background: linear-gradient(135deg, #FB923C 0%, #F97316 50%, #EA580C 100%);
+  box-shadow: 0 6px 25px 0px rgba(234, 88, 12, 0.6);
+}
+
+/* Custom Animations */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
