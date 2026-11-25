@@ -110,7 +110,16 @@ export default function Home() {
   const [copiedBank, setCopiedBank] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"upi" | "bank">("upi");
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
+  const [activeVideo, setActiveVideo] = useState<"mandir" | "puja" | "gaushala">("mandir");
+  const [selectedDarshan, setSelectedDarshan] = useState<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
+  const DARSHAN_PHOTOS = [
+    { src: "/hanuman-garland.jpg", label: "Sacred Murti" },
+    { src: "/hanuman-altar.jpg", label: "Full Altar" },
+    { src: "/hanuman-evening.jpg", label: "Evening Aarti" },
+    { src: "/hanuman-bhog.jpg", label: "Daily Bhog" },
+  ];
 
   const [donorForm, setDonorForm] = useState({ name: "", phone: "", email: "", pan: "" });
   const [donationSubmitted, setDonationSubmitted] = useState<boolean>(false);
@@ -502,7 +511,22 @@ export default function Home() {
             </div>
 
             <div className="border border-amber-600/25 bg-[#1A120E] rounded-2xl p-6 text-center space-y-4">
-              <div className="text-4xl" aria-hidden="true">🐄</div>
+              <div className="relative w-44 h-64 mx-auto rounded-2xl overflow-hidden border border-amber-500/35 shadow-lg bg-black">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                >
+                  <source src="/gaushala-feeding.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                <span className="absolute bottom-2 left-2 right-2 text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/55 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/25">
+                  Gau Mata Seva
+                </span>
+              </div>
               <h4 className="playfair-heading text-base font-bold text-white">Daily Gaushala Pledge</h4>
               <p className="text-xs text-[#FCF8F2]/65 leading-relaxed font-light" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
                 Every dawn without exception — green grass, jaggery, grain flour, mineral care, clean water, and genuine affection. That is our daily promise to Gau Mata.
@@ -540,22 +564,38 @@ export default function Home() {
       <section id="hanumanji" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#1B1410]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center">
-            {/* Photo card */}
+            {/* Photo card with interactive Darshan gallery */}
             <div className="border border-amber-600/30 bg-[#231A14] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
-              <div className="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border border-amber-500/40 mb-5 shadow-xl">
-                <Image
-                  src="/black-hanuman-closeup.webp"
-                  alt="Hanuman Mandir — Sacred Murti"
-                  width={240}
-                  height={240}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+              <div className="relative w-52 h-60 sm:w-64 sm:h-72 rounded-2xl overflow-hidden border border-amber-500/40 mb-4 shadow-xl bg-black">
+                <img
+                  src={DARSHAN_PHOTOS[selectedDarshan].src}
+                  alt={`Hanuman Mandir — ${DARSHAN_PHOTOS[selectedDarshan].label}`}
+                  className="w-full h-full object-cover transition-opacity duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <span className="absolute bottom-2 left-2 right-2 text-center text-[10px] uppercase font-bold tracking-wider text-amber-200 bg-black/60 backdrop-blur-sm py-0.5 px-2 rounded-full border border-amber-400/25">
-                  Divine Darshan
+                  {DARSHAN_PHOTOS[selectedDarshan].label}
                 </span>
               </div>
+
+              {/* Thumbnail switcher */}
+              <div className="flex items-center justify-center gap-2 mb-5">
+                {DARSHAN_PHOTOS.map((photo, idx) => (
+                  <button
+                    key={photo.src}
+                    onClick={() => setSelectedDarshan(idx)}
+                    aria-label={photo.label}
+                    className={`w-11 h-11 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                      selectedDarshan === idx
+                        ? "border-amber-400 scale-105 shadow-md"
+                        : "border-amber-700/30 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={photo.src} alt={photo.label} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+
               <div className="sanskrit-text text-sm sm:text-base text-amber-200 italic mb-1 leading-relaxed">
                 "मनोजवं मारुततुल्यवेगं जितेन्द्रियं बुद्धिमतां वरिष्ठम्"
               </div>
@@ -932,18 +972,52 @@ export default function Home() {
       {isVideoModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
           <div className="relative w-full max-w-3xl bg-[#1F1712] border border-amber-500/35 rounded-3xl overflow-hidden shadow-2xl">
-            <div className="flex items-center justify-between p-4 border-b border-amber-700/25 bg-black/35">
+            <div className="flex flex-wrap items-center justify-between gap-2 p-4 border-b border-amber-700/25 bg-black/35">
               <span className="sanskrit-text text-sm sm:text-base font-bold text-amber-300">
-                ॥ मन्दिर दर्शन एवं लंगर सेवा ॥
+                ॥ मन्दिर दर्शन एवं सेवा ॥
               </span>
-              <button onClick={() => setIsVideoModalOpen(false)}
-                className="text-white/60 hover:text-white p-1 rounded-lg transition-colors cursor-pointer">
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-1.5" style={{ fontFamily: "'Lato', sans-serif" }}>
+                {[
+                  { id: "mandir" as const, label: "Mandir Darshan" },
+                  { id: "puja" as const, label: "Hanuman Puja" },
+                  { id: "gaushala" as const, label: "Gaushala Seva" },
+                ].map((v) => (
+                  <button
+                    key={v.id}
+                    onClick={() => setActiveVideo(v.id)}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                      activeVideo === v.id
+                        ? "bg-amber-500 text-white"
+                        : "bg-white/5 text-white/65 hover:text-white"
+                    }`}
+                  >
+                    {v.label}
+                  </button>
+                ))}
+                <button onClick={() => setIsVideoModalOpen(false)}
+                  className="text-white/60 hover:text-white p-1 rounded-lg transition-colors cursor-pointer ml-1">
+                  <X size={20} />
+                </button>
+              </div>
             </div>
-            <div className="aspect-video w-full bg-black">
-              <video controls autoPlay className="w-full h-full object-cover" poster="/black-hanuman-ji.webp">
-                <source src="/mandir-darshan.mp4" type="video/mp4" />
+            <div className="aspect-video w-full bg-black flex items-center justify-center">
+              <video
+                key={activeVideo}
+                controls
+                autoPlay
+                className="w-full h-full object-contain"
+                poster={activeVideo === "puja" ? "/hanuman-garland.jpg" : "/black-hanuman-ji.webp"}
+              >
+                <source
+                  src={
+                    activeVideo === "mandir"
+                      ? "/mandir-darshan.mp4"
+                      : activeVideo === "puja"
+                      ? "/hanuman-puja.mp4"
+                      : "/gaushala-cows.mp4"
+                  }
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -952,7 +1026,7 @@ export default function Home() {
                 className="saffron-btn-gradient text-white text-xs uppercase font-bold tracking-wider px-6 py-2.5 rounded-full inline-flex items-center gap-2 shadow"
                 style={{ fontFamily: "'Lato', sans-serif" }}>
                 <Heart size={14} className="fill-white" />
-                Sponsor Sunday Langad Seva
+                Sponsor Sunday Langad &amp; Gaushala Seva
               </a>
             </div>
           </div>
