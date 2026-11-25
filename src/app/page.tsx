@@ -280,73 +280,113 @@ export default function Home() {
         )}
       </header>
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden" style={{ minHeight: 'calc(100dvh - 96px)', paddingTop: '3rem', paddingBottom: '3rem' }}>
-        {/* Blurred video background */}
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <video
-            autoPlay loop muted playsInline preload="none"
-            poster="/black-hanuman-ji.webp"
-            className="w-full h-full object-cover scale-110 blur-xl opacity-30 brightness-90"
+      {[
+        {
+          id: "option-1",
+          label: "Option 1: Custom 16:9 Temple Sanctum",
+          bgType: "sanctum" as const,
+        },
+        {
+          id: "option-2",
+          label: "Option 2: Real Mandir Altar Photo",
+          bgType: "altar" as const,
+        },
+        {
+          id: "option-3",
+          label: "Option 3: Clean Golden Sanctuary Glow",
+          bgType: "glow" as const,
+        },
+      ].map((heroVariant) => (
+        <section
+          key={heroVariant.id}
+          className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden border-b border-amber-700/20"
+          style={{ minHeight: "calc(100dvh - 96px)", paddingTop: "3rem", paddingBottom: "3rem" }}
+        >
+          <span
+            className="absolute top-4 left-4 z-20 text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full bg-black/60 text-amber-300 border border-amber-500/35 backdrop-blur-sm"
+            style={{ fontFamily: "'Lato', sans-serif" }}
           >
-            <source src="/temple-bg.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/65 to-[#18120E]/75" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.15)_0%,transparent_65%)]" />
-        </div>
+            {heroVariant.label}
+          </span>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-          {/* Hero logo */}
-          <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm mb-5 sm:mb-7">
-            <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
-            <picture>
-              <source srcSet="/logo-transparent.webp" type="image/webp" />
+          {heroVariant.bgType === "sanctum" && (
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
               <img
-                src="/logo-transparent.png"
-                alt="Shyam Mangaram Foundation"
-                width={384}
-                height={384}
-                className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
-                fetchPriority="high"
+                src="/hero-temple-sanctum.jpg"
+                alt=""
+                className="w-full h-full object-cover opacity-55 brightness-90"
               />
-            </picture>
-          </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/55 to-[#18120E]/70" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.16)_0%,transparent_65%)]" />
+            </div>
+          )}
 
-          {/* Sanskrit Creed Meaning / Subtitle */}
-          <div className="mb-2">
-            <div className="text-xs sm:text-sm text-amber-200/70 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-              Service is our highest duty — this is our faith, our practice, and our path.
+          {heroVariant.bgType === "altar" && (
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <img
+                src="/hanuman-evening.jpg"
+                alt=""
+                className="w-full h-full object-cover scale-105 blur-md opacity-35 brightness-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/65 to-[#18120E]/75" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.18)_0%,transparent_65%)]" />
+            </div>
+          )}
+
+          {heroVariant.bgType === "glow" && (
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#18120E]">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(245,158,11,0.24)_0%,rgba(180,83,9,0.10)_38%,transparent_72%)]" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#1F150E]/60 via-transparent to-[#161008]" />
+            </div>
+          )}
+
+          <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
+            <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm mb-5 sm:mb-7">
+              <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
+              <picture>
+                <source srcSet="/logo-transparent.webp" type="image/webp" />
+                <img
+                  src="/logo-transparent.png"
+                  alt="Shyam Mangaram Foundation"
+                  width={384}
+                  height={384}
+                  className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
+                  fetchPriority={heroVariant.bgType === "sanctum" ? "high" : "auto"}
+                />
+              </picture>
+            </div>
+
+            <div className="mb-2">
+              <div className="text-xs sm:text-sm text-amber-200/70 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                Service is our highest duty — this is our faith, our practice, and our path.
+              </div>
+            </div>
+
+            <p className="mt-6 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
+              We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-2 sm:px-0">
+              <a
+                href="#donate"
+                className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg"
+                style={{ fontFamily: "'Lato', sans-serif" }}
+              >
+                <Heart size={15} className="fill-white shrink-0" />
+                Sponsor Food &amp; Gaushala Seva
+              </a>
+              <button
+                onClick={() => setIsVideoModalOpen(true)}
+                className="w-full sm:w-auto bg-[#28201A]/80 hover:bg-[#342820] border border-amber-600/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
+                style={{ fontFamily: "'Lato', sans-serif" }}
+              >
+                <Play size={13} className="fill-amber-300 text-amber-300 shrink-0" />
+                Watch Temple Darshan
+              </button>
             </div>
           </div>
-
-          {/* Tagline */}
-          <p className="mt-6 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
-            We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
-          </p>
-
-          {/* CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-2 sm:px-0">
-            <a
-              href="#donate"
-              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg"
-              style={{ fontFamily: "'Lato', sans-serif" }}
-            >
-              <Heart size={15} className="fill-white shrink-0" />
-              Sponsor Food &amp; Gaushala Seva
-            </a>
-            <button
-              onClick={() => setIsVideoModalOpen(true)}
-              className="w-full sm:w-auto bg-[#28201A]/80 hover:bg-[#342820] border border-amber-600/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
-              style={{ fontFamily: "'Lato', sans-serif" }}
-            >
-              <Play size={13} className="fill-amber-300 text-amber-300 shrink-0" />
-              Watch Temple Darshan
-            </button>
-          </div>
-        </div>
-
-      </section>
+        </section>
+      ))}
 
       {/* ── WHAT WE STAND FOR (SANATAN DHARMA) ───────────────────────────── */}
       <section id="what-we-stand-for" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#161008]">
