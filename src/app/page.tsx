@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   Heart,
@@ -123,6 +123,39 @@ export default function Home() {
 
   const [donorForm, setDonorForm] = useState({ name: "", phone: "", email: "", pan: "" });
   const [donationSubmitted, setDonationSubmitted] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const key = e.key.toLowerCase();
+      if (
+        e.key === "F12" ||
+        ((e.ctrlKey || e.metaKey) && e.shiftKey && (key === "i" || key === "j" || key === "c")) ||
+        ((e.ctrlKey || e.metaKey) && (key === "u" || key === "s"))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    const handleDragStart = (e: DragEvent) => {
+      if (e.target instanceof HTMLImageElement || e.target instanceof HTMLVideoElement) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("dragstart", handleDragStart);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("dragstart", handleDragStart);
+    };
+  }, []);
 
   const UPI_ID = "shyammangaramfoundation@sbi";
   const UPI_NAME = "Shyam Mangaram Foundation";
@@ -517,6 +550,8 @@ export default function Home() {
                   loop
                   muted
                   playsInline
+                  disablePictureInPicture
+                  controlsList="nodownload"
                   preload="metadata"
                   className="w-full h-full object-cover"
                 >
@@ -1005,6 +1040,8 @@ export default function Home() {
                 key={activeVideo}
                 controls
                 autoPlay
+                disablePictureInPicture
+                controlsList="nodownload"
                 className="w-full h-full object-contain"
                 poster={activeVideo === "puja" ? "/hanuman-garland.jpg" : "/black-hanuman-ji.webp"}
               >
