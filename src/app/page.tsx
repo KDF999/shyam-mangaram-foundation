@@ -195,13 +195,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#18120E] text-[#FCF8F2] selection:bg-amber-400 selection:text-black antialiased overflow-x-hidden">
 
-      {/* ── TOP ANNOUNCEMENT STRIP ───────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-[#7A2305] via-[#A84B08] to-[#7A2305] text-white py-2 px-3 sm:px-4 text-center border-b border-amber-600/20 flex items-center justify-center gap-2 sm:gap-3">
-        <span className="sanskrit-text text-sm sm:text-base font-semibold text-amber-200 tracking-wide shrink-0">
-          ॥ ॐ श्री हनुमते नमः ॥
-        </span>
-        <span className="hidden sm:inline text-amber-500/40 text-xs">•</span>
-        <span className="text-xs sm:text-sm text-white/80 font-light truncate" style={{ fontFamily: "'Lato', sans-serif" }}>
+        <span className="text-xs sm:text-sm text-white/90 font-light truncate" style={{ fontFamily: "'Lato', sans-serif" }}>
           Sunday Langad in Chembur &mdash; Free of Cost &nbsp;&amp;&nbsp; Pavitra Gaushala Seva
         </span>
         <a
@@ -212,7 +207,6 @@ export default function Home() {
         </a>
       </div>
 
-      {/* ── NAVIGATION ───────────────────────────────────────────────────── */}
       <header className="sticky top-0 z-40 bg-[#1C1510]/95 backdrop-blur-md border-b border-amber-700/20 px-4 sm:px-8 py-3">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group">
