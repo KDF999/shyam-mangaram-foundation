@@ -284,6 +284,7 @@ export default function Home() {
         className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden border-b border-amber-700/20"
         style={{ minHeight: "calc(100dvh - 96px)", paddingTop: "3rem", paddingBottom: "3rem" }}
       >
+        {/* Background */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             src="/hero-temple-sanctum.jpg"
@@ -294,49 +295,56 @@ export default function Home() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.16)_0%,transparent_65%)]" />
         </div>
 
-          <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-            <div className="relative w-full max-w-[240px] sm:max-w-xs md:max-w-sm mb-0">
-              <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
-              <img
-                src="/logo-hero.png"
-                alt="Shyam Mangaram Foundation"
-                width={384}
-                height={384}
-                className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
-                fetchPriority="high"
-              />
-            </div>
+        {/* Content */}
+        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
 
-            <div className="-mt-5 sm:-mt-7 mb-1">
-              <div className="text-xs sm:text-sm text-amber-200/90 font-semibold tracking-[0.22em] uppercase" style={{ fontFamily: "'Lato', sans-serif" }}>
-                Seva &bull; Sanskaar &bull; Samarpan
-              </div>
-            </div>
-
-            <p className="mt-4 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
-              We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
-            </p>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-2 sm:px-0">
-              <a
-                href="#donate"
-                className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg"
-                style={{ fontFamily: "'Lato', sans-serif" }}
-              >
-                <Heart size={15} className="fill-white shrink-0" />
-                Sponsor Food &amp; Gaushala Seva
-              </a>
-              <button
-                onClick={() => setIsVideoModalOpen(true)}
-                className="w-full sm:w-auto bg-[#28201A]/80 hover:bg-[#342820] border border-amber-600/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
-                style={{ fontFamily: "'Lato', sans-serif" }}
-              >
-                <Play size={13} className="fill-amber-300 text-amber-300 shrink-0" />
-                Watch Temple Darshan
-              </button>
-            </div>
+          {/* Logo */}
+          <div className="relative w-full max-w-[200px] sm:max-w-[260px] md:max-w-[300px] mb-3">
+            <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
+            <img
+              src="/logo-hero.png"
+              alt="Shyam Mangaram Foundation"
+              width={384}
+              height={384}
+              className="relative w-full h-auto object-contain drop-shadow-[0_8px_24px_rgba(245,158,11,0.35)]"
+              fetchPriority="high"
+            />
           </div>
-        </section>
+
+          {/* Tagline */}
+          <div className="mb-5">
+            <span className="text-xs sm:text-sm text-amber-300/90 font-semibold tracking-[0.28em] uppercase" style={{ fontFamily: "'Lato', sans-serif" }}>
+              Seva &bull; Sanskaar &bull; Samarpan
+            </span>
+          </div>
+
+          {/* Hero description */}
+          <p className="text-sm sm:text-base text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
+            We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
+          </p>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto px-2 sm:px-0">
+            <a
+              href="#donate"
+              className="w-full sm:w-auto saffron-btn-gradient text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-8 py-3.5 rounded-full flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-transform shadow-lg"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              <Heart size={15} className="fill-white shrink-0" />
+              Sponsor Food &amp; Gaushala Seva
+            </a>
+            <button
+              onClick={() => setIsVideoModalOpen(true)}
+              className="w-full sm:w-auto bg-[#28201A]/80 hover:bg-[#342820] border border-amber-600/30 text-amber-200 text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm transition-all"
+              style={{ fontFamily: "'Lato', sans-serif" }}
+            >
+              <Play size={13} className="fill-amber-300 text-amber-300 shrink-0" />
+              Watch Temple Darshan
+            </button>
+          </div>
+
+        </div>
+      </section>
 
       {/* ── WHAT WE STAND FOR (SANATAN DHARMA) ───────────────────────────── */}
       <section id="what-we-stand-for" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#161008]">
