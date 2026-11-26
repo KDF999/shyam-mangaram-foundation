@@ -157,7 +157,7 @@ export default function Home() {
     };
   }, []);
 
-  const UPI_ID = "shyammangaramfoundation@sbi";
+  const UPI_ID = "9321459129@pthdfc";
   const UPI_NAME = "Shyam Mangaram Foundation";
   const effectiveAmount = isCustom ? Number(customAmount) || 0 : selectedAmount;
 
@@ -197,7 +197,7 @@ export default function Home() {
 
       <div className="bg-gradient-to-r from-[#7A2305] via-[#A84B08] to-[#7A2305] text-white py-2 px-3 sm:px-4 text-center border-b border-amber-600/20 flex items-center justify-center gap-2 sm:gap-3">
         <span className="text-xs sm:text-sm text-white/90 font-light truncate" style={{ fontFamily: "'Lato', sans-serif" }}>
-          Sunday Langad in Chembur &mdash; Free of Cost &nbsp;&amp;&nbsp; Pavitra Gaushala Seva
+          Sunday Langad in Chembur &mdash; Served with Love &nbsp;&amp;&nbsp; Pavitra Gaushala Seva
         </span>
         <a
           href="#donate"
@@ -280,89 +280,40 @@ export default function Home() {
         )}
       </header>
 
-      {[
-        {
-          id: "option-1",
-          label: "Option 1: Custom 16:9 Temple Sanctum",
-          bgType: "sanctum" as const,
-        },
-        {
-          id: "option-2",
-          label: "Option 2: Real Mandir Altar Photo",
-          bgType: "altar" as const,
-        },
-        {
-          id: "option-3",
-          label: "Option 3: Clean Golden Sanctuary Glow",
-          bgType: "glow" as const,
-        },
-      ].map((heroVariant) => (
-        <section
-          key={heroVariant.id}
-          className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden border-b border-amber-700/20"
-          style={{ minHeight: "calc(100dvh - 96px)", paddingTop: "3rem", paddingBottom: "3rem" }}
-        >
-          <span
-            className="absolute top-4 left-4 z-20 text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-full bg-black/60 text-amber-300 border border-amber-500/35 backdrop-blur-sm"
-            style={{ fontFamily: "'Lato', sans-serif" }}
-          >
-            {heroVariant.label}
-          </span>
-
-          {heroVariant.bgType === "sanctum" && (
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-              <img
-                src="/hero-temple-sanctum.jpg"
-                alt=""
-                className="w-full h-full object-cover opacity-55 brightness-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/55 to-[#18120E]/70" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.16)_0%,transparent_65%)]" />
-            </div>
-          )}
-
-          {heroVariant.bgType === "altar" && (
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-              <img
-                src="/hanuman-evening.jpg"
-                alt=""
-                className="w-full h-full object-cover scale-105 blur-md opacity-35 brightness-90"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/65 to-[#18120E]/75" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.18)_0%,transparent_65%)]" />
-            </div>
-          )}
-
-          {heroVariant.bgType === "glow" && (
-            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none bg-[#18120E]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(245,158,11,0.24)_0%,rgba(180,83,9,0.10)_38%,transparent_72%)]" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#1F150E]/60 via-transparent to-[#161008]" />
-            </div>
-          )}
+      <section
+        className="relative flex flex-col justify-center items-center text-center px-4 sm:px-8 overflow-hidden border-b border-amber-700/20"
+        style={{ minHeight: "calc(100dvh - 96px)", paddingTop: "3rem", paddingBottom: "3rem" }}
+      >
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src="/hero-temple-sanctum.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-55 brightness-90"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#18120E] via-[#1D1510]/55 to-[#18120E]/70" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(245,158,11,0.16)_0%,transparent_65%)]" />
+        </div>
 
           <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-            <div className="relative w-full max-w-[200px] sm:max-w-xs md:max-w-sm mb-5 sm:mb-7">
+            <div className="relative w-full max-w-[240px] sm:max-w-xs md:max-w-sm mb-0">
               <div className="absolute inset-0 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
-              <picture>
-                <source srcSet="/logo-transparent.webp" type="image/webp" />
-                <img
-                  src="/logo-transparent.png"
-                  alt="Shyam Mangaram Foundation"
-                  width={384}
-                  height={384}
-                  className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
-                  fetchPriority={heroVariant.bgType === "sanctum" ? "high" : "auto"}
-                />
-              </picture>
+              <img
+                src="/logo-hero.png"
+                alt="Shyam Mangaram Foundation"
+                width={384}
+                height={384}
+                className="relative w-full h-auto object-contain drop-shadow-[0_10px_28px_rgba(245,158,11,0.3)]"
+                fetchPriority="high"
+              />
             </div>
 
-            <div className="mb-2">
-              <div className="text-xs sm:text-sm text-amber-200/70 font-light italic" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                Service is our highest duty — this is our faith, our practice, and our path.
+            <div className="-mt-5 sm:-mt-7 mb-1">
+              <div className="text-xs sm:text-sm text-amber-200/90 font-semibold tracking-[0.22em] uppercase" style={{ fontFamily: "'Lato', sans-serif" }}>
+                Seva &bull; Sanskaar &bull; Samarpan
               </div>
             </div>
 
-            <p className="mt-6 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
+            <p className="mt-4 text-sm sm:text-base md:text-lg text-[#FCF8F2]/80 leading-relaxed max-w-2xl px-2" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 2vw, 1.2rem)" }}>
               We feed thousands every Sunday through our <strong className="text-amber-300 font-semibold">Langad in Chembur</strong> — always free, always with love. We care for holy cows through our <strong className="text-amber-400 font-semibold">Gaushala Seva</strong>, and we tend to our sacred <strong className="text-amber-300 font-semibold">Hanuman Mandir</strong> and sanctuaries in <strong className="text-amber-300 font-semibold">Goa and Mumbai</strong>.
             </p>
 
@@ -386,7 +337,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-      ))}
 
       {/* ── WHAT WE STAND FOR (SANATAN DHARMA) ───────────────────────────── */}
       <section id="what-we-stand-for" className="py-14 sm:py-20 px-4 sm:px-8 border-t border-amber-700/15 bg-[#161008]">
@@ -456,6 +406,26 @@ export default function Home() {
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
+            <div className="border border-amber-700/25 bg-[#1E1510] rounded-2xl p-6 sm:p-7 hover:border-amber-600/40 transition-colors">
+              <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">
+                Farmers&rsquo; Welfare
+              </h3>
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                Supporting and providing financial assistance to the widows of farmers, recognising the sacrifices and hardships faced by farming families.
+              </p>
+            </div>
+
+            <div className="border border-amber-700/25 bg-[#1E1510] rounded-2xl p-6 sm:p-7 hover:border-amber-600/40 transition-colors">
+              <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-2">
+                Education for Underprivileged Children
+              </h3>
+              <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
+                Helping children from economically weaker backgrounds access quality education and build better futures.
+              </p>
+            </div>
+          </div>
+
           {/* Pull-quote */}
           <div className="mt-10 sm:mt-14 border-l-4 border-amber-500 pl-5 sm:pl-8 max-w-3xl mx-auto">
             <p className="text-base sm:text-xl text-[#FCF8F2]/80 italic leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(1rem, 2vw, 1.3rem)" }}>
@@ -482,7 +452,7 @@ export default function Home() {
               Sunday Langad in Chembur
             </h2>
             <p className="text-sm sm:text-base text-[#FCF8F2]/75 font-light leading-loose" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)" }}>
-              Every Sunday morning, the Chembur temple opens its gates wide. By 11:30 AM, the giant degs are bubbling — dal, sabzi, roti, rice, halwa. Over 3,500 people sit together and eat. It costs them nothing. No token, no ID, no form. Just a plate, served with both hands, and a smile.
+              Every Sunday morning, the Chembur temple opens its gates wide. From 12:00 PM onwards, the giant degs are bubbling — dal, sabzi, roti, rice, halwa. Over 15,000+ people sit together and eat. No token, no ID, no form. Just a plate, served with both hands, and a smile.
             </p>
           </div>
 
@@ -490,8 +460,8 @@ export default function Home() {
             {[
               {
                 num: "01.",
-                title: "Always Free of Cost",
-                body: "Every Sunday meal is served completely free to anyone who comes — the elderly, children, labourers, students, sadhus, and families. No questions asked.",
+                title: "Food Served with Love, Kindness & No Expectations",
+                body: "Every Sunday meal is served with warmth and dignity to anyone who comes — the elderly, children, labourers, students, sadhus, and families. No questions asked.",
               },
               {
                 num: "02.",
@@ -516,7 +486,7 @@ export default function Home() {
           <div className="border border-amber-600/30 bg-[#261D17] rounded-2xl p-5 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
             <div>
               <div className="playfair-heading text-base sm:text-xl font-bold text-white mb-1">
-                ₹501 feeds 10 people this Sunday — free of cost.
+                ₹501 feeds 10 people this Sunday — served with love.
               </div>
               <p className="text-xs text-[#FCF8F2]/60 font-light max-w-xl" style={{ fontFamily: "'Lato', sans-serif" }}>
                 Your contribution goes directly into grains, ghee, fresh vegetables, and the fuel that keeps those degs burning every week.
@@ -691,15 +661,15 @@ export default function Home() {
               <div className="pt-2 flex flex-wrap gap-6 text-xs text-amber-300/85 font-medium" style={{ fontFamily: "'Lato', sans-serif" }}>
                 <div>
                   <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Morning Darshan</span>
-                  6:00 AM – 12:30 PM
+                  8:00 AM – 1:00 PM
                 </div>
                 <div>
-                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Evening Aarti</span>
-                  5:30 PM – 9:00 PM
+                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Evening Darshan</span>
+                  4:00 PM – 8:00 PM
                 </div>
                 <div>
-                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">Special Pujas</span>
-                  Every Tuesday &amp; Saturday
+                  <span className="block text-[10px] uppercase text-[#FCF8F2]/40 mb-0.5">LKS House Darshan</span>
+                  6:30 PM everyday
                 </div>
               </div>
 
@@ -747,11 +717,11 @@ export default function Home() {
               <div className="p-5 flex flex-col flex-1">
                 <h3 className="playfair-heading text-base sm:text-lg font-bold text-white mb-1.5">Chembur Mandir, Mumbai</h3>
                 <p className="text-xs sm:text-sm text-[#FCF8F2]/65 font-light leading-relaxed mb-4 flex-1" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "1rem" }}>
-                  Home of the Sunday Langad and the heart of our community in Mumbai. Daily morning chants, Hanuman Chalisa recitations, and 3,500+ people fed here every week.
+                  Home of the Sunday Langad and the heart of our community in Mumbai. Daily morning chants, Hanuman Chalisa recitations, and 15,000+ people fed here every week.
                 </p>
                 <div className="text-[11px] text-[#FCF8F2]/55 space-y-1 mb-4" style={{ fontFamily: "'Lato', sans-serif" }}>
-                  <div className="flex items-center gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0" /> Chembur East, Mumbai</div>
-                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Sunday Langad: 11:30 AM onwards</div>
+                  <div className="flex items-start gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0 mt-0.5" /> <span>Office No.13, CTS No. 410, S.I.C.H.S. Ltd, Next to Acres Club, Hemu Kalani Marg, Chembur, Mumbai - 400 071, Maharashtra.</span></div>
+                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Sunday Langad: 12:00 PM onwards</div>
                 </div>
                 <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-amber-300 hover:text-white py-2 border border-amber-600/30 rounded-xl hover:border-amber-400 transition-colors" style={{ fontFamily: "'Lato', sans-serif" }}>
                   Sponsor Sunday Feast
@@ -775,8 +745,8 @@ export default function Home() {
                   A quiet, serene sanctuary offering daily prayers, holy chants, and darshan for pilgrims and sadhus. A place to slow down and remember what matters.
                 </p>
                 <div className="text-[11px] text-[#FCF8F2]/55 space-y-1 mb-4" style={{ fontFamily: "'Lato', sans-serif" }}>
-                  <div className="flex items-center gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0" /> Goa Temple Campus, Goa</div>
-                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Daily Aarti: 7:00 AM &amp; 7:30 PM</div>
+                  <div className="flex items-start gap-1.5"><MapPin size={11} className="text-amber-500 shrink-0 mt-0.5" /> <span>Hanuman Mandir, Kiranpani bandar road, Khaskilwada, Aronda, Sawantwadi - 416513, Maharashtra</span></div>
+                  <div className="flex items-center gap-1.5"><Clock size={11} className="text-amber-500 shrink-0" /> Darshan: 8:00 AM – 1:00 PM &amp; 4:00 PM – 8:00 PM</div>
                 </div>
                 <a href="#donate" className="block text-center text-xs uppercase font-bold tracking-wider text-white py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 rounded-xl transition-all" style={{ fontFamily: "'Lato', sans-serif" }}>
                   Goa Mandir Seva
@@ -839,9 +809,9 @@ export default function Home() {
                           : "bg-[#1A120E] border-amber-700/20 hover:border-amber-500/40 text-white/75"
                       }`}
                     >
-                      <div className="flex items-baseline justify-between mb-1">
-                        <span className="playfair-heading font-bold text-white text-base">₹{tier.amount.toLocaleString("en-IN")}</span>
-                        <span className="text-[10px] text-amber-300 uppercase tracking-wider font-semibold" style={{ fontFamily: "'Lato', sans-serif" }}>{tier.name}</span>
+                      <div className="flex items-baseline justify-between gap-3 mb-1.5">
+                        <span className="playfair-heading font-bold text-white text-base shrink-0">₹{tier.amount.toLocaleString("en-IN")}</span>
+                        <span className="text-[10px] text-amber-300 uppercase tracking-wider font-semibold text-right leading-tight" style={{ fontFamily: "'Lato', sans-serif" }}>{tier.name}</span>
                       </div>
                       <p className="text-[11px] text-[#FCF8F2]/65 leading-snug" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: "0.9rem" }}>{tier.impact}</p>
                     </button>
@@ -940,9 +910,9 @@ export default function Home() {
                 <div className="w-full text-left space-y-2 text-xs">
                   {[
                     { label: "Beneficiary", val: "Shyam Mangaram Foundation", key: "" },
-                    { label: "Bank & Branch", val: "State Bank of India (SBI), Chembur, Mumbai", key: "" },
-                    { label: "Account Number", val: "418902847192", key: "acc" },
-                    { label: "IFSC Code", val: "SBIN0000523", key: "ifsc" },
+                    { label: "Bank & Branch", val: "Kotak Mahindra Bank Ltd., Plot No. 359, Central Avenue Road, Opp. Diamond Garden, Chembur - 400 071", key: "" },
+                    { label: "Current A/c No.", val: "7211555725", key: "acc" },
+                    { label: "IFSC Code", val: "KKBK0000960", key: "ifsc" },
                   ].map(({ label, val, key }) => (
                     <div key={label} className="bg-[#18110D] border border-amber-700/25 rounded-xl p-3 flex items-center justify-between">
                       <div>
@@ -987,12 +957,12 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <a
-              href="https://wa.me/919820000000?text=Jai%20Shree%20Ram!%20I%20want%20to%20volunteer%20for%20the%20Sunday%20Langad%20and%20Gaushala%20Seva."
+              href="https://wa.me/919321459129?text=Jai%20Shree%20Ram!%20I%20want%20to%20volunteer%20for%20the%20Sunday%20Langad%20and%20Gaushala%20Seva."
               target="_blank" rel="noopener noreferrer"
               className="w-full sm:w-auto bg-emerald-800 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow cursor-pointer"
               style={{ fontFamily: "'Lato', sans-serif" }}
             >
-              Connect on WhatsApp
+              Connect on WhatsApp (+91 93214 59129)
             </a>
             <a
               href="#donate"
